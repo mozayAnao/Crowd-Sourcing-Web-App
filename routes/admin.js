@@ -44,4 +44,10 @@ router.get('/dashboard', function(req, res, next) {
   
 });
 
+router.get('/addUser', function(req, res, next) {
+  res.render('addUser', {
+    user: req.user
+  });
+});
+
 module.exports = router;

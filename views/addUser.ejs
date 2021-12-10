@@ -1,0 +1,52 @@
+<%include header%> 
+<body>
+    <%include adminNav%>
+      <main class="mt-5 pt-12">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Users</h4>
+            </div>
+          </div>
+                  
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <div class="bg-body shadow p-3 mb-5 bg-body rounded" id="addUser-form">
+                  <h4>Add user</h4>
+                <form action="/admin/saveUser" method="post">
+                    <div class="mb-3">
+                        <!-- <label for="name" class="form-label">Name</label> -->
+                        <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Full Name">
+                    </div>
+                    <div class="mb-3">
+                      <!-- <label for="email" class="form-label">Email address</label> -->
+                      <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email">
+                    </div>
+                    <div class="mb-3">
+                        <!-- <label for="exampleInputEmail1" class="form-label">Phone Number</label> -->
+                        <input type="tel" class="form-control" name="phone" id="phone" aria-describedby="emailHelp">
+                        <input type="hidden" id="phoneCode" name="phoneCode">
+                    </div>
+                    <div class="mb-3">
+                        <!-- <label for="exampleInputEmail1" class="form-label">Role</label> -->
+                        <select class="form-select" name="role" id="role">
+                            <option value="">Select Role</option>
+                            <option value="1">Administrator</option>
+                            <option value="2">Financial Administrator</option>
+                            <option value="3">Reviewer</option>
+                        </select>
+                        <!-- <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"> -->
+                      </div>
+                    <div class="mb-3">
+                      <!-- <label for="exampleInputPassword1" class="form-label">Password</label> -->
+                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <%include scripts%> 
+</body>

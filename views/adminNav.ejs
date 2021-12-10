@@ -29,7 +29,7 @@
               <li><a class="dropdown-item" href="#">Personal identification</a></li>
               <li><a class="dropdown-item" href="#">Account settings</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+              <li><a class="dropdown-item" href="/admin">Sign out</a></li>
             </ul>
           </li>
             <!-- <li class="nav-item dropdown">
@@ -71,7 +71,7 @@
             </div>
           </li>
           <li>
-            <a href="#" class="nav-link px-3 active">
+            <a href="/admin/dashboard?id=${req.user.id}" class="nav-link px-3 active">
               <span class="me-2"><i class="bi bi-speedometer2"></i></span>
               <span>Dashboard</span>
             </a>
@@ -83,7 +83,8 @@
               data-bs-toggle="collapse"
               href="#users"
             >
-              <span class="me-2"><i class="bi bi-layout-split"></i></span>
+              <span class="me-2"><ion-icon name="person"></ion-icon>
+              </span>
               <span>Users</span>
               <span class="ms-auto">
                 <span class="right-icon">
@@ -94,7 +95,7 @@
             <div class="collapse" id="users">
               <ul class="navbar-nav ps-3">
                 <li>
-                  <a href="#" class="nav-link px-3">
+                  <a href="/admin/addUser" class="nav-link px-3">
                     <span class="me-2"
                       ><i class="bi bi-speedometer2"></i
                     ></span>
@@ -102,7 +103,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="nav-link px-3">
+                  <a href="/admin/manageUser" class="nav-link px-3">
                     <span class="me-2"
                       ><i class="bi bi-speedometer2"></i
                     ></span>
@@ -130,7 +131,7 @@
             <div class="collapse" id="projects">
               <ul class="navbar-nav ps-3">
                 <li>
-                  <a href="#" class="nav-link px-3">
+                  <a href="/admin/newProjects" class="nav-link px-3">
                     <span class="me-2"
                       ><i class="bi bi-speedometer2"></i
                     ></span>
@@ -138,7 +139,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="nav-link px-3">
+                  <a href="/admin/reviewedProjects" class="nav-link px-3">
                     <span class="me-2"
                       ><i class="bi bi-speedometer2"></i
                     ></span>
@@ -146,7 +147,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="#" class="nav-link px-3">
+                  <a href="/admin/publishedProjects" class="nav-link px-3">
                     <span class="me-2"
                       ><i class="bi bi-speedometer2"></i
                     ></span>
