@@ -1,0 +1,16 @@
+<%include header%> 
+
+<%-include('navbarAuthenticated', {user: user})-%>
+
+<body>
+    <div class="myProjectPage bg-light shadow-lg rounded">
+        <div class="mpp-user"><h2>Hi! <%=user.username%></div>
+        
+        <div class="mpp">
+            <section class="sec shadow-lg p-5" onclick="window.location.href = '/projectOwner/createProject'">Create a Project</section>
+            <section class="sec shadow-lg p-5" onclick="window.location.href = '/projectOwner/myProjects'">My Projects</section>
+        </div>
+    </div>   
+    <%include scripts%> 
+    <%include footer%> 
+</body>

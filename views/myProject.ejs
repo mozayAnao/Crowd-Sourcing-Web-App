@@ -1,0 +1,281 @@
+<%include header%> 
+<%-include('navbarAuthenticated', {user: user})-%>
+<body>
+    <div class="myProjectContainer">
+        <div class="prj1">
+            <div id="prj1" type="button" data-bs-toggle="modal" data-bs-target="#updatetitle" title="Click to Edit"><h2><%=projectDetails[0].title%></h2></div>
+            <div id="prj1" type="button" data-bs-toggle="modal" data-bs-target="#updatetitle" title="Click to Edit"><p>by <%=projectDetails[0].organizationName%></p></div>
+            <br>
+            <div id="prj1" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photos[0].path%>" alt="" width="100%" height="400px"></div>
+            <div id="prj1"><h4>Description of the project</h4></div>
+            <div id="prj1" type="button" data-bs-toggle="modal" data-bs-target="#updateDescription" title="Click to Edit"><p><%=projectDetails[0].description%></p></div>
+            <br>
+            <br>
+            <div id="prj1" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photos[1].path%>" alt="" width="100%" height="400px"></div>
+            <br>
+            <div id="prj1"><h4>Aimed end result of the project</h4></div>
+            <div id="prj1" type="button" data-bs-toggle="modal" data-bs-target="#updateAimedResult" title="Click to Edit"><p><%=projectDetails[0].aimedResult%></p></div>
+            <br>
+            <br>
+            <div id="prj1"><h4>Description of the impact on the digital transformation of Africa </h4></div>
+            <div id="prj1" type="button" data-bs-toggle="modal" data-bs-target="#updateImpact" title="Click to Edit"><p><%=projectDetails[0].descriptionOfImpact%></p></div>
+            <br>
+            <div id="prj1" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photos[2].path%>" alt="" width="100%" height="400px"></div>
+        </div>
+        <div class="prj2">
+            <!-- <%if(projectFunding[0].amountRecieved == null) projectFunding[0].amountRecieved = 0;%> -->
+            <div><p>amount collected: <%if(projectFunding[0].currencyId == 'GHS') {%><%=projectFunding[0].amountRecieved.toLocaleString('en-GH', { style: 'currency', currency: 'GHS' });%><%}else {%><%=projectFunding[0].amountRecieved.toLocaleString('en-GH', { style: 'currency', currency: 'CFA' });%><%}%></p></div>
+            <div></div>
+            <!-- <%if(projectFunding[0].amountRecieved == null) {%>
+                <%var percent = 0;%>
+                <div class="progress mb-2">
+                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="55" aria-valuemin="91" aria-valuemax="100" style="width:'<%=percent%>%'"><%=percent%>%</div>
+                 </div>
+            <%}else {%> -->
+                <%var percent = (projectFunding[0].amountRecieved/projectFunding[0].amountRequired)*100; console.log(percent); console.log(projectFunding[0].amountRecieved)%>
+                <div class="progress mb-2">
+                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="55" aria-valuemin="91" aria-valuemax="100" style="width:<%=percent%>%;"><%=parseInt(percent)%>%</div>
+                 </div>
+            <!-- <%}%>                    -->
+            <!-- end: progress bard -->
+            <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateTarget" title="Click to Edit"><p>target: <%if(projectFunding[0].currencyId == 'GHS') {%><%=projectFunding[0].amountRequired.toLocaleString('en-GH', { style: 'currency', currency: 'GHS' });%><%}else {%><%=projectFunding[0].amountRequired.toLocaleString('en-GH', { style: 'currency', currency: 'CFA' });%><%}%></p></div>
+            <br>
+            <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateDates" title="Click to Edit fundraiser campaign dates"><b>Fundraiser Campaign days left:</b></div>
+            <%var present_date = new Date();%>
+            <%var difference = projectDetails[0].fundCampaignEndDate.getTime() - present_date.getTime();%>
+            <%var days = Math.ceil(difference / (1000 * 3600 * 24));%>
+            <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateDates" title="Click to Edit fundraiser campaign dates"><b><%=days%></b></div> 
+
+            <br>
+            <div><p>project status:</p></div>
+            <%if(projectDetails[0].statusId == 1) {%>
+                <button class="btn bg-info">Pending Review</button>
+                <%}else if(projectDetails[0].statusId == 2) {%>
+                    <button class="btn bg-light">Reviewed</button>
+                    <%}else {%>fixed-top
+                        <button class="btn bg-success">Published</button>
+                        <%}%>
+            <br>
+            <br>
+            <br>
+            <br>
+            <button class="btn bg-dark" onclick="window.location.href='/projectOwner/editProject?id=<%=projectDetails[0].id%>'">Delete Project</button>
+            <br>
+            <br>
+            <br>
+            <div>
+                <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateAddress" title="Click to Edit">Country: <%=address[0].country%></div>
+                <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateAddress" title="Click to Edit">Region: <%=address[0].region%></div>
+                <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateAddress" title="Click to Edit">GPS Location: <%=address[0].gpsCordinates%></div>
+                <br>
+                <br>
+                <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateSocial" title="Click to Edit"><b>Social Media Links</b></div>
+                <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateSocial" title="Click to Edit"><ion-icon name="logo-youtube"></ion-icon> <%=socialMedia[0].link%></div>
+                <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateSocial" title="Click to Edit"><ion-icon name="logo-facebook"></ion-icon> <%=socialMedia[1].link%></div>
+                <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateSocial" title="Click to Edit"><ion-icon name="logo-twitter"></ion-icon> <%=socialMedia[2].link%></div>
+                <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateSocial" title="Click to Edit"><ion-icon name="logo-instagram"></ion-icon> <%=socialMedia[3].link%></div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+<div class="modal fade" id="updateSocial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-transparent border-0">
+            <form class="frm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=social" method="post">
+                <div class="mb-3">
+                  <label for="youtube" class="form-label"><ion-icon name="logo-youtube"></ion-icon> youTube</label>
+                  <input type="text" class="form-control" id="youtube" name="youtube" value="<%=socialMedia[0].link%>">
+                  <!-- <div id="emailHelp" class="form-text"><ion-icon name="logo-youtube"></ion-icon></div> -->
+                </div>
+                <div class="mb-3">
+                    <label for="facebook" class="form-label"><ion-icon name="logo-facebook"></ion-icon> facebook</label>
+                    <input type="text" class="form-control" id="facebook" name="facebook" value="<%=socialMedia[1].link%>">
+                    <!-- <div id="emailHelp" class="form-text"><ion-icon name="logo-facebook"></ion-icon></div> -->
+                  </div>
+                  <div class="mb-3">
+                    <label for="twitter" class="form-label"><ion-icon name="logo-twitter"></ion-icon> twitter</label>
+                    <input type="text" class="form-control" id="twitter" name="twitter" value="<%=socialMedia[2].link%>">
+                    <!-- <div id="emailHelp" class="form-text"><ion-icon name="logo-twitter"></ion-icon></div> -->
+                  </div>
+                  <div class="mb-3">
+                    <label for="instagram" class="form-label"><ion-icon name="logo-instagram"></ion-icon> instagram</label>
+                    <input type="text" class="form-control" id="instagram" name="instagram" value="<%=socialMedia[3].link%>">
+                    <!-- <div id="emailHelp" class="form-text"><ion-icon name="logo-instagram"></ion-icon></div> -->
+                  </div>
+                
+                <button type="submit" class="btn btn-primary">Update</button>
+              </form>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="updateAddress" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-transparent border-0">
+            <form class="frm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=address" method="post">
+                <div class="mb-3">
+                  <label for="country" class="form-label">Country</label>
+                  <select class="inputFields" name="country" id="country">
+                    <option value="<%=address[0].country%>"><%=address[0].country%></option>
+                    <option value="Burkina Faso">Burkina Faso</option>
+                    <option value="Ghana">Ghana</option>
+                </select>
+                  <!-- <input type="text" class="form-control" id="country" name="country" value="<%=address[0].country%>"> -->
+                  <!-- <div id="emailHelp" class="form-text"><ion-icon name="logo-youtube"></ion-icon></div> -->
+                </div>
+                <div class="mb-3">
+                    <label for="region" class="form-label">Region</label>
+                    <input type="text" class="form-control" id="region" name="region" value="<%=address[0].region%>">
+                    <!-- <div id="emailHelp" class="form-text"><ion-icon name="logo-facebook"></ion-icon></div> -->
+                  </div>
+                  <div class="mb-3">
+                    <label for="gps" class="form-label">GPS Location</label>
+                    <input type="text" class="form-control" id="gps" name="gps" value="<%=address[0].gpsCordinates%>">
+                    <!-- <div id="emailHelp" class="form-text"><ion-icon name="logo-twitter"></ion-icon></div> -->
+                  </div>                
+                <button type="submit" class="btn btn-primary">Update</button>
+              </form>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="updateDates" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-transparent border-0">
+            <form class="frm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=projectDates" method="post">
+                <div class="mb-3">
+                  <label for="startDate" class="form-label">Campaign start date</label>
+                  <input type="date" class="form-control" id="startDate" name="startDate" value="<%=projectDetails[0].fundCampaignStartDate%>">
+                  <!-- <div id="emailHelp" class="form-text"><ion-icon name="logo-youtube"></ion-icon></div> -->
+                </div>
+                <div class="mb-3">
+                    <label for="endDate" class="form-label">Campaign end date</label>
+                    <input type="date" class="form-control" id="endDate" name="endDate" value="<%=projectDetails[0].fundCampaignEndDate%>">
+                    <!-- <div id="emailHelp" class="form-text"><ion-icon name="logo-facebook"></ion-icon></div> -->
+                  </div>           
+                <button type="submit" class="btn btn-primary">Update</button>
+              </form>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="updateTitle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-transparent border-0">
+            <form class="frm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=projectTitle" method="post">
+                <div class="mb-3">
+                  <label for="title" class="form-label">Project Title</label>
+                  <input type="text" class="form-control" id="title" name="title" value="<%=projectDetails[0].title%>">
+                  <!-- <div id="emailHelp" class="form-text"><ion-icon name="logo-youtube"></ion-icon></div> -->
+                </div>
+                <div class="mb-3">
+                    <label for="org" class="form-label">Organization</label>
+                    <input type="text" class="form-control" id="org" name="org" value="<%=projectDetails[0].organizationName%>">
+                    <!-- <div id="emailHelp" class="form-text"><ion-icon name="logo-facebook"></ion-icon></div> -->
+                  </div>           
+                <button type="submit" class="btn btn-primary">Update</button>
+              </form>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="updateTarget" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-transparent border-0">
+            <form class="frm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=funding" method="post">
+                <div class="mb-3">
+                  <label for="amount" class="form-label">Target amount</label>
+                  <input type="text" class="form-control" id="amount" name="amount" value="<%=projectFunding[0].amountRequired%>">
+                  <!-- <div id="emailHelp" class="form-text"><ion-icon name="logo-youtube"></ion-icon></div> -->
+                </div>
+                <div class="mb-3">
+                    <label for="currency" class="form-label">Currency</label>
+                    <select class="inputFields" name="currency" id="currency">
+                        <option value="<%=projectFunding[0].currencyId%>"><%=projectFunding[0].currencyId%></option>
+                        <option value="CFA">CFA</option>
+                        <option value="GHS">GHS</option>
+                    </select>
+                    <!-- <input type="text" class="form-control" id="currency" name="currency" value="<%=projectFunding[0].currencyId%>"> -->
+                    <!-- <div id="emailHelp" class="form-text"><ion-icon name="logo-facebook"></ion-icon></div> -->
+                  </div>           
+                <button type="submit" class="btn btn-primary">Update</button>
+              </form>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="updateDescription" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-transparent border-0">
+            <form class="frm updateForm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=description" method="post">
+                <div class="mb-3">
+                  <label for="description" class="form-label">Project Description</label>
+                  <textarea 
+                    name="description" 
+                    id="description" 
+                    cols="50" 
+                    rows="10" 
+                    placeholder="State the aimed result of you project" 
+                    required><%=projectDetails[0].description%>
+                  </textarea>
+                  <!-- <div id="emailHelp" class="form-text"><ion-icon name="logo-youtube"></ion-icon></div> -->
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+              </form>
+        </div>
+    </div>
+  </div>
+
+   <!-- Modal -->
+<div class="modal fade" id="updateAimedResult" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-transparent border-0">
+            <form class="frm updateForm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=aim" method="post">
+                <div class="mb-3">
+                  <label for="aimedResult" class="form-label">Aimed end result of the project</label>
+                  <textarea 
+                    name="aimedResult" 
+                    id="aimedResult" 
+                    cols="50" 
+                    rows="10" 
+                    placeholder="State the aimed result of you project" 
+                    required><%=projectDetails[0].aimedResult%>
+                  </textarea>
+                  <!-- <div id="emailHelp" class="form-text"><ion-icon name="logo-youtube"></ion-icon></div> -->
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+              </form>
+        </div>
+    </div>
+  </div>
+
+   <!-- Modal -->
+<div class="modal fade" id="updateImpact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-transparent border-0">
+            <form class="frm updateForm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=impact" method="post">
+                <div class="mb-3">
+                  <label for="impact" class="form-label">Description of the impact on the digital transformation of Africa</label>
+                  <textarea 
+                    name="impact" 
+                    id="impact" 
+                    cols="50" 
+                    rows="10" 
+                    placeholder="State the aimed result of you project" 
+                    required><%=projectDetails[0].descriptionOfImpact%>
+                  </textarea>
+                  <!-- <div id="emailHelp" class="form-text"><ion-icon name="logo-youtube"></ion-icon></div> -->
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+              </form>
+        </div>
+    </div>
+  </div>
+  <%include scripts%> 
+    <%include footer%> 
+</body>

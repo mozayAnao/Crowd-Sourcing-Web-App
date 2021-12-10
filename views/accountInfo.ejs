@@ -1,0 +1,62 @@
+<%include header%>  
+ 
+<body>
+    <%-include('navbarAuthenticated', {username: username, profilePhoto: profilePhoto})-%> 
+    <div class="accountDetails">
+        <div id="acc-contain">
+            <div class="info"><h2>Account Settings</h2></div>
+            <div class="info">
+                <figure>
+                    <img src="<%=profilePhoto%>" alt="<%=profilePhoto%>" style="border-radius: 50%; width: 80; height: 80;">
+                </figure>
+            </div>
+            <div class="info">
+                <form class="accInfoForm" action="/accounts/newuser?apiUserId=<%=apiUserId%>" method="post">
+                    <div><label for="userName">Name</label></div>
+                    <div><input type="text" class="inputFields" name="userName" id="userName" value="<%=username%>"></div>
+                    <div><label for="email">email</label></div>
+                    <div><input type="email" class="inputFields" name="email" id="email"></div>
+                    <div><label for="phone">Phone Number</label></div>
+                    <div><input id="phone" type="tel" class="inputFields" name="phone" id="phone"/></div>
+                    <div><input type="hidden" id="phoneCode" name="phoneCode"></div>
+                    <div><input type="submit" class="inputFields inputButton" value="Save"></div>
+                    <div><input type="submit" class="inputFields inputButton" value="Cancel"></div>
+                </form>
+            </div>
+        </div>     
+    </div>
+    <%include scripts%> 
+    <script>
+        const phoneInputField = document.querySelector("#phone");
+        const phoneInput = window.intlTelInput(phoneInputField, {
+          initialCountry: "auto",
+          geoIpLookup: getIp,
+          utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+        });
+
+        function getIp(callback) {
+        fetch('https://ipinfo.io/json?token=2997d36693a5ef', { headers: { 'Accept': 'application/json' }})
+            .then((resp) => resp.json())
+            .catch(() => {
+            return {
+                country: 'us',
+            };
+            })
+            .then((resp) => callback(resp.country));
+        }
+
+        const phone = document.querySelector("#phone");   
+        const phoneCode = document.querySelector("#phoneCode"); 
+
+        phone.addEventListener('input', updateValue);
+
+        function updateValue(e) {
+            const phoneNumber = phoneInput.getNumber();
+            // info.style.display = "";
+            phoneCode.value = `${phoneNumber}`;
+        }    
+        
+        
+      </script>
+</body>

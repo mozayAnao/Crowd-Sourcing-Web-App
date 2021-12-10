@@ -1,0 +1,17 @@
+$blue: #4C49A2;
+
+.space-2 {
+  padding-top:7rem;
+    padding-bottom:7rem;
+}
+.bg-light {
+  background-color: #F7FBFE!important;
+}
+
+a.card-text {
+  color:inherit;
+}
+a:hover {
+  color:$blue;
+  text-decoration:none;
+}

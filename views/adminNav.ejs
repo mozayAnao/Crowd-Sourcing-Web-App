@@ -1,0 +1,163 @@
+<!-- ====================navbar========================= -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="/images/MNFUNDAFRIC-logos_transparent.png" alt="" width="200" height="80"></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        
+        <!-- <form class="d-flex ms-auto">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button class="btn btn-primary" type="button" id="button-addon2"><ion-icon name="search-sharp"></ion-icon></button>
+              </div>
+        </form> -->
+        <br>
+        <ul class="navbar-nav ms-auto mb-3 mb-lg-0">
+          <li class="nav-item dropdown">
+        
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <b><%=user.username%></b>  <img id = "" src="<%=user.photo%>" alt="" style = 'border-radius: 50%; width: 35; height: 35; background-image: url(/images/default.jpg);'>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#"><img id = "profilePic" src="<%=user.photo%>"" alt="" style = 'border-radius: 50%; width: 30; height: 30;'> Welcome <br>  </a>
+              </li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item myBtn" id = "myBtn" href="/projectOwner/createProject">Create a project</a></li>
+              <li><a class="dropdown-item" href="#">Notifications</a></li>
+              <li><a class="dropdown-item" href="#">Personal identification</a></li>
+              <li><a class="dropdown-item" href="#">Account settings</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+            </ul>
+          </li>
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle dropdown-menu-end" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <ion-icon name="person-outline"></ion-icon>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li> -->
+          </ul>
+        
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===============================offcanvas=========================== -->
+  <!-- <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+    Link with href
+  </a>
+  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+    Button with data-bs-target
+  </button> -->
+  
+  <div class="offcanvas offcanvas-start sidebar-nav bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <!-- <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5> -->
+      <!-- <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
+    </div>
+    <div class="offcanvas-body p-0">
+      <nav class="navbar-dark">
+        <ul class="navbar-nav">
+          <li>
+            <div class="text-muted small fw-bold text-uppercase px-3">
+              CORE
+            </div>
+          </li>
+          <li>
+            <a href="#" class="nav-link px-3 active">
+              <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
+          <li>
+            <a
+              class="nav-link px-3 sidebar-link"
+              data-bs-toggle="collapse"
+              href="#users"
+            >
+              <span class="me-2"><i class="bi bi-layout-split"></i></span>
+              <span>Users</span>
+              <span class="ms-auto">
+                <span class="right-icon">
+                  <i class="bi bi-chevron-down"></i>
+                </span>
+              </span>
+            </a>
+            <div class="collapse" id="users">
+              <ul class="navbar-nav ps-3">
+                <li>
+                  <a href="#" class="nav-link px-3">
+                    <span class="me-2"
+                      ><i class="bi bi-speedometer2"></i
+                    ></span>
+                    <span>Add User</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="nav-link px-3">
+                    <span class="me-2"
+                      ><i class="bi bi-speedometer2"></i
+                    ></span>
+                    <span>Manage Users</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
+          <li>
+            <a
+              class="nav-link px-3 sidebar-link"
+              data-bs-toggle="collapse"
+              href="#projects"
+            >
+              <span class="me-2"><i class="bi bi-layout-split"></i></span>
+              <span>Projects</span>
+              <span class="ms-auto">
+                <span class="right-icon">
+                  <i class="bi bi-chevron-down"></i>
+                </span>
+              </span>
+            </a>
+            <div class="collapse" id="projects">
+              <ul class="navbar-nav ps-3">
+                <li>
+                  <a href="#" class="nav-link px-3">
+                    <span class="me-2"
+                      ><i class="bi bi-speedometer2"></i
+                    ></span>
+                    <span>New</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="nav-link px-3">
+                    <span class="me-2"
+                      ><i class="bi bi-speedometer2"></i
+                    ></span>
+                    <span>Reviewed</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="nav-link px-3">
+                    <span class="me-2"
+                      ><i class="bi bi-speedometer2"></i
+                    ></span>
+                    <span>Published</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
