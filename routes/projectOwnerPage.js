@@ -208,7 +208,7 @@ function isLoggedIn(req, res, next) {
 
 function isLoggedOut (req, res, next) {
   if(!req.isAuthenticated()) return next();
-  res.redirect("/");
+  res.redirect(req.originalUrl);
 }
 
 // // route middleware to make sure

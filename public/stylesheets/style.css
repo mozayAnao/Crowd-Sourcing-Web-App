@@ -315,7 +315,7 @@ footer {
   /* justify-content: center; */
 }
 
-.card {
+.project-card {
   margin-right: 20px;
   /* min-width: 25em;
   max-width: 25em; */
@@ -402,6 +402,7 @@ textarea {
 .myProjectContainer {
   margin-left: 15%;
   margin-right: 15%;
+  padding-top: 90px;
   display: flex;
   justify-content: center;
 }

@@ -7,7 +7,7 @@
             <div id="project-cards">
                 
             <%projects.forEach((project) => {%>               
-                <div class="card" onclick="window.location.href='/projectOwner/myProject?id=<%=project.id%>'">
+                <div class="card project-card" onclick="window.location.href='/projectOwner/myProject?id=<%=project.id%>'">
                     <%if(project.projectStatusId == 1) {%>
                         <button class="btn bg-info">Pending</button>
                         <%}else if(project.projectStatusId == 2) {%>

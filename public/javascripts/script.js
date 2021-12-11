@@ -28,6 +28,11 @@
             phoneCode.value = `${phoneNumber}`;
         }    
 
+        $(document).ready(function () {
+          $(".data-table").each(function (_, table) {
+            $(table).DataTable();
+          });
+        });
 
 const charts = document.querySelectorAll(".chart");
 
@@ -71,11 +76,7 @@ charts.forEach(function (chart) {
   });
 });
 
-$(document).ready(function () {
-  $(".data-table").each(function (_, table) {
-    $(table).DataTable();
-  });
-});
-        
+
+   
         
    

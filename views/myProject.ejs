@@ -1,6 +1,7 @@
 <%include header%> 
-<%-include('navbarAuthenticated', {user: user})-%>
+
 <body>
+  <%-include('navbarAuthenticated', {user: user})-%>
     <div class="myProjectContainer">
         <div class="prj1">
             <div id="prj1" type="button" data-bs-toggle="modal" data-bs-target="#updatetitle" title="Click to Edit"><h2><%=projectDetails[0].title%></h2></div>

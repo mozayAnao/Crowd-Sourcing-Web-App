@@ -1,0 +1,163 @@
+<%include header%> 
+<body>
+    <%include adminNav%>
+    <main class="mt-5 pt-12">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Users</h4>
+            </div>
+          </div>
+                  
+          <div class="row">
+            <div class="col-md-12 mb-3">
+                <div class="card">
+                    <div class="card-header">
+                      <span><i class="bi bi-table me-2"></i></span> Admins
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table
+                          id="example"
+                          class="table table-striped data-table table-success table-hover"
+                          style="width: 100%"
+                        >
+                          <thead>
+                            <tr>
+                                <th>User Id</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <%users.forEach((user) => {%>
+                                <%if(user.roleId < '4') {%>
+                                <tr>
+                                  <td><%=user.id%></td>
+                                  <td><%=user.name%></td>
+                                  <td><%=user.email%></td>
+                                  <td><%=user.phoneNumber%></td>
+                                  <td><%=user.role%></td>
+                                  <td><span data-bs-toggle="tooltip" title="edit" style="margin-right: 10px; padding: 5px;"><a href="/admin/editUser?id='<%=user.id%>'" data-bs-toggle="tooltip" title="edit"><ion-icon name="create"></ion-icon></a></span>     <span data-bs-toggle="tooltip" title="delete <%=user.name%>"  style="margin-left: 10px; padding: 5px;"><a href="/admin/deleteUser?id='<%=user.id%>'"><ion-icon name="trash"></ion-icon></a></span></td>
+                                </tr>
+                               <%}%>
+                              <%})%>
+                            
+                          </tbody>
+                          <tfoot>
+                            <tr>
+                              <th>User Id</th>
+                              <th>Name</th>
+                              <th>Email</th>
+                              <th>Phone Number</th>
+                              <th>Role</th>
+                              <th>Action</th>
+                            </tr>
+                          </tfoot>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="card">
+                    <div class="card-header">
+                      <span><i class="bi bi-table me-2"></i></span> Project Owners
+                    </div>
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table
+                          id="example"
+                          class="table table-striped data-table table-success table-hover"
+                          style="width: 100%"
+                        >
+                        <thead>
+                            <tr>
+                                <th>User Id</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Action</th>                                
+                              </tr>
+                          </thead>
+                          <tbody>
+                            <%users.forEach((user) => {%>
+                                <%if(user.roleId == '4') {%>
+                                <tr>
+                                  <td><%=user.id%></td>
+                                  <td><%=user.name%></td>
+                                  <td><%=user.email%></td>
+                                  <td><%=user.phoneNumber%></td>
+                                  <td><span style="margin-right: 10px; padding: 5px;"><a href="/admin/editUser?id='<%=user.id%>'" data-bs-toggle="tooltip" title="edit"><ion-icon name="create"></ion-icon></a></span>     <span data-bs-toggle="tooltip" title="delete <%=user.name%>"  style="margin-left: 10px; padding: 5px;"><a href="/admin/deleteUser?id='<%=user.id%>'"><ion-icon name="trash"></ion-icon></a></span></td>
+                                </tr>
+                               <%}%>
+                              <%})%>
+                            
+                          </tbody>
+                          <tfoot>
+                            <tr>
+                              <th>User Id</th>
+                              <th>Name</th>
+                              <th>Email</th>
+                              <th>Phone Number</th>
+                              <th>Action</th>
+                            </tr>
+                          </tfoot>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      
+      <!-- ============modal======================== -->
+      <div class="modal fade" id="editUser-modal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content bg-transparent border-0">
+          <div class="app signup-modal">
+            <form class="frm signup-form" action="/admin/saveUser" method="post">
+                <div class="mb-3">
+                    <!-- <label for="name" class="form-label">Name</label> -->
+                    <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Full Name" value="<%=user.name%>" required>
+                </div>
+                <div class="mb-3">
+                  <!-- <label for="email" class="form-label">Email address</label> -->
+                  <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Email" value="<%=user.email%>" required>
+                </div>
+                <div class="mb-3">
+                    <!-- <label for="exampleInputEmail1" class="form-label">Phone Number</label> -->
+                    <input type="tel" class="form-control" name="phone" id="phone" aria-describedby="emailHelp" value="<%=user.phoneNumber%>" required>
+                    <input type="hidden" id="phoneCode" name="phoneCode">
+                </div>
+                <div class="mb-3">
+                    <!-- <label for="exampleInputEmail1" class="form-label">Role</label> -->
+                    <select class="form-select" name="role" id="role" required>
+                        <option value="<%=user.roleId%>"><%=user.role%></option>
+                        <option value="1">Administrator</option>
+                        <option value="2">Financial Administrator</option>
+                        <option value="3">Reviewer</option>
+                    </select>
+                  </div>
+                <!-- <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                </div> -->
+                <button type="submit" class="btn btn-primary">Save</button>
+              </form>
+        </div>
+        </div>
+        </div>
+      </div>
+      <!-- <script>
+        $(document).ready(function () {
+          $(".data-table").each(function (_, table) {
+              $(table).DataTable();
+          });
+          });
+    </script> -->
+    <%include scripts%> 
+</body>
