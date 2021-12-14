@@ -81,7 +81,7 @@ module.exports = function(passport) {
                     var insertQuery = "INSERT INTO login_table (userId, username, password) VALUES (?,?,?)";
                     var insertQuery2 = "INSERT INTO users (id, name, email, phoneNumber, roleId) VALUES (?,?,?,?,?)";
                    
-                    con.query(insertQuery2,[newUserMysql.userId, newUserMysql.name, newUserMysql.email, newUserMysql.phone, newUserMysql.roleId],function(err, rows) {
+                    con.query(insertQuery2,[newUserMysql.userId, newUserMysql.username, newUserMysql.email, newUserMysql.phone, newUserMysql.roleId],function(err, rows) {
                         if (err)
                         console.log(err);
                         console.log("new user added")

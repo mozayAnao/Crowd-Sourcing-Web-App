@@ -10,11 +10,13 @@
                 <div class="card project-card" onclick="window.location.href='/projectOwner/myProject?id=<%=project.id%>'">
                     <%if(project.projectStatusId == 1) {%>
                         <button class="btn bg-info">Pending</button>
-                        <%}else if(project.projectStatusId == 2) {%>
-                            <button class="btn bg-light">Reviewed</button>
-                            <%}else {%>
-                                <button class="btn bg-success">Published</button>
-                                <%}%>
+                        <%}else if(project.projectStatusId == 6) {%>
+                            <button class="btn bg-info">Under Review</button>
+                            <%}else if(project.projectStatusId == 2) {%>
+                                <button class="btn bg-primary">Reviewed</button>
+                                <%}else {%>
+                                    <button class="btn bg-success">Published</button>
+                                    <%}%>
                   <img src="<%=project.path%>" class="card-img-top" alt="...">
                   <div class="card-body border rounded-bottom">
                     

@@ -15,9 +15,11 @@ const LocalStrategy = require('passport-local').Strategy;
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var logoutRouter = require('./routes/logout');
+var adminLogoutRouter = require('./routes/adminLogout');
 var projectOwnerPageRouter = require('./routes/projectOwnerPage');
 const accountsRouter = require('./routes/accounts');
 const adminRouter = require('./routes/admin');
+const reviewer = require('./routes/reviewer');
 const con = require('./modules/dbConnect');
 const passportConfig = require('./config');
 require('./modules/passport')(passport);
@@ -65,9 +67,11 @@ function isLoggedOut (req, res, next) {
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/logout', logoutRouter);
+app.use('/adminLogout', adminLogoutRouter);
 app.use('/accounts', accountsRouter);
 app.use('/projectOwner', projectOwnerPageRouter);
 app.use('/admin', adminRouter);
+app.use('/reviewer', reviewer);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

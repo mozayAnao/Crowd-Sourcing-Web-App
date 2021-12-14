@@ -1,6 +1,6 @@
 var nodemailer = require('nodemailer');
 
-module.exports = function mailer(receipient, subject, txt, html) {
+module.exports = function mailer(receipient, subject, html) {
 
     var transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -14,7 +14,6 @@ module.exports = function mailer(receipient, subject, txt, html) {
         from: 'mosesanao13@gmail.com',
         to: receipient,
         subject: subject,
-        text: txt,
         html: html
       };
       

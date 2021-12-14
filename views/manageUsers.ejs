@@ -15,6 +15,7 @@
                     <div class="card-header">
                       <span><i class="bi bi-table me-2"></i></span> Admins
                     </div>
+                    <!-- =====================Table for admins==================== -->
                     <div class="card-body">
                       <div class="table-responsive">
                         <table
@@ -41,7 +42,7 @@
                                   <td><%=user.email%></td>
                                   <td><%=user.phoneNumber%></td>
                                   <td><%=user.role%></td>
-                                  <td><span data-bs-toggle="tooltip" title="edit" style="margin-right: 10px; padding: 5px;"><a href="/admin/editUser?id='<%=user.id%>'" data-bs-toggle="tooltip" title="edit"><ion-icon name="create"></ion-icon></a></span>     <span data-bs-toggle="tooltip" title="delete <%=user.name%>"  style="margin-left: 10px; padding: 5px;"><a href="/admin/deleteUser?id='<%=user.id%>'"><ion-icon name="trash"></ion-icon></a></span></td>
+                                  <td><span data-bs-toggle="tooltip" title="edit" style="margin-right: 10px; padding: 5px;"><a href="/admin/editUser?id='<%=user.id%>'" data-bs-toggle="tooltip" title="edit"><ion-icon name="create"></ion-icon></a></span>     <span data-bs-toggle="tooltip" title="delete <%=user.name%>"  style="margin-left: 10px; padding: 5px;"><a type="button" href="/admin/delete?id=<%=user.id%>&name=<%=user.name%>"><ion-icon data-bs-toggle="tooltip" title="delete <%=user.name%>" name="trash"></ion-icon></a></span></td>
                                 </tr>
                                <%}%>
                               <%})%>
@@ -61,7 +62,7 @@
                       </div>
                     </div>
                   </div>
-
+                  <!-- ===================Table for project owners======================== -->
                   <div class="card">
                     <div class="card-header">
                       <span><i class="bi bi-table me-2"></i></span> Project Owners
@@ -90,7 +91,7 @@
                                   <td><%=user.name%></td>
                                   <td><%=user.email%></td>
                                   <td><%=user.phoneNumber%></td>
-                                  <td><span style="margin-right: 10px; padding: 5px;"><a href="/admin/editUser?id='<%=user.id%>'" data-bs-toggle="tooltip" title="edit"><ion-icon name="create"></ion-icon></a></span>     <span data-bs-toggle="tooltip" title="delete <%=user.name%>"  style="margin-left: 10px; padding: 5px;"><a href="/admin/deleteUser?id='<%=user.id%>'"><ion-icon name="trash"></ion-icon></a></span></td>
+                                  <td><span style="margin-right: 10px; padding: 5px;"><a href="/admin/editUser?id='<%=user.id%>'" data-bs-toggle="tooltip" title="edit"><ion-icon name="create"></ion-icon></a></span>     <span data-bs-toggle="tooltip" title="delete <%=user.name%>"  style="margin-left: 10px; padding: 5px;"><a href="/admin/delete?id=<%=user.id%>&name=<%=user.name%>"><ion-icon data-bs-toggle="tooltip" title="delete <%=user.name%>" name="trash"></ion-icon></a></span></td>
                                 </tr>
                                <%}%>
                               <%})%>
@@ -115,7 +116,7 @@
       </main>
       
       <!-- ============modal======================== -->
-      <div class="modal fade" id="editUser-modal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+      <div class="modal fade" id="deleteUser-modal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content bg-transparent border-0">
           <div class="app signup-modal">

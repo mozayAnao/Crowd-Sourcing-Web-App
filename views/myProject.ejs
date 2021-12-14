@@ -51,11 +51,13 @@
             <div><p>project status:</p></div>
             <%if(projectDetails[0].statusId == 1) {%>
                 <button class="btn bg-info">Pending Review</button>
-                <%}else if(projectDetails[0].statusId == 2) {%>
-                    <button class="btn bg-light">Reviewed</button>
-                    <%}else {%>fixed-top
-                        <button class="btn bg-success">Published</button>
-                        <%}%>
+                <%}else if(projectDetails[0].statusId == 6) {%>
+                  <button class="btn bg-info">Under Review</button>
+                  <%}else if(projectDetails[0].statusId == 2) {%>
+                      <button class="btn bg-primary">Reviewed</button>
+                      <%}else {%>
+                          <button class="btn bg-success">Published</button>
+                          <%}%>
             <br>
             <br>
             <br>

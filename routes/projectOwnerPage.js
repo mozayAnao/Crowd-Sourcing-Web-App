@@ -5,14 +5,15 @@ const multer  = require('multer')
 const upload = multer({ dest: './public/images/uploads/' })
 const con = require('../modules/dbConnect');
 const { v4: uuidv4 } = require('uuid');
+const auth = require('../modules/authenticate');
 
-router.get('/', isLoggedIn, function(req, res, next) {
+router.get('/', auth.isLoggedIn, function(req, res, next) {
     res.render('projectOwner', { 
         user : req.user 
       })
 });
 
-router.get('/myProjects', isLoggedIn, function(req, res, next) {
+router.get('/myProjects', auth.isLoggedIn, function(req, res, next) {
   var sql = `SELECT project_details.id AS id, project_details.title AS title, project_details.description AS description, project_details.fundCampaignstartDate, project_details.fundCampaignEndDate, project_details.statusId AS projectStatusId, project_funding.amountRequired, project_funding.amountRecieved, project_funding.currencyId, photos.projectId, photos.path FROM project_details JOIN project_funding ON project_details.id = project_funding.projectId JOIN photos on project_funding.projectId = photos.projectId WHERE project_details.projectOwnerId = '${req.user.id}' GROUP BY photos.projectId`;
   con.query(sql, function (err, result) {
     if (err) throw err;
@@ -25,7 +26,7 @@ router.get('/myProjects', isLoggedIn, function(req, res, next) {
   
 });
 
-router.get('/myProject', isLoggedIn, function(req, res, next) {
+router.get('/myProject', auth.isLoggedIn, function(req, res, next) {
   var sql = `SELECT * FROM project_details WHERE id = '${req.query.id}'`;
   var sql2 = `SELECT * FROM project_funding WHERE projectId = '${req.query.id}'`;
   var sql3 = `SELECT * FROM photos WHERE projectId = '${req.query.id}'`;
@@ -64,14 +65,14 @@ router.get('/myProject', isLoggedIn, function(req, res, next) {
 });
 
 
-router.get('/createProject', isLoggedIn, function(req, res, next) {
+router.get('/createProject', auth.isLoggedIn, function(req, res, next) {
   console.log(req.user)
   res.render('createProject', { 
       user : req.user 
     })
 });
 
-router.post('/editProject', isLoggedIn, function(req, res, next) {
+router.post('/editProject', auth.isLoggedIn, function(req, res, next) {
   if(req.query.model == 'description') {
     var sql = `UPDATE project_details SET description = "${req.body.description}" WHERE id = '${req.query.projectId}'`
     con.query(sql, function(err, rows) {
@@ -147,7 +148,7 @@ router.post('/editProject', isLoggedIn, function(req, res, next) {
   }
 });
 
-router.post('/saveProject', isLoggedIn, upload.array('initialPhotos', 3), function(req, res, next) {
+router.post('/saveProject', auth.isLoggedIn, upload.array('initialPhotos', 3), function(req, res, next) {
   console.log(req.files)
   console.log(req.body)
   var insertQuery1 = "INSERT INTO project_details (id, title, description, aimedResult, organizationName, descriptionOfImpact, fundCampaignstartDate, fundCampaignEndDate, projectOwnerId, statusId) VALUES (?,?,?,?,?,?,?,?,?,?)";
@@ -200,26 +201,5 @@ router.post('/saveProject', isLoggedIn, upload.array('initialPhotos', 3), functi
       })
     });  
 });
-
-function isLoggedIn(req, res, next) {
-  if(req.isAuthenticated()) return next();
-  res.redirect("/");
-}
-
-function isLoggedOut (req, res, next) {
-  if(!req.isAuthenticated()) return next();
-  res.redirect(req.originalUrl);
-}
-
-// // route middleware to make sure
-// function isLoggedIn(req, res, next) {
-
-// 	// if user is authenticated in the session, carry on
-// 	if (req.isAuthenticated())
-// 		return next();
-
-// 	// if they aren't redirect them to the home page
-// 	res.redirect('/');
-// }
 
 module.exports = router;

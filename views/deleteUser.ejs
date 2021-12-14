@@ -1,0 +1,32 @@
+<%include header%> 
+<body>
+    <%include adminNav%>
+      <main class="mt-5 pt-12">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <h4>Users</h4>
+            </div>
+          </div>
+                  
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <div class="bg-body shadow p-3 mb-5 bg-body rounded" id="deleteUser-form">
+                  <h4><a href="/admin/manageUsers"><ion-icon name="arrow-back-circle-sharp"></ion-icon></a> Delete user</h4>
+                <form action="/admin/deleteUser" method="post">
+                    
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Confirm Removal of <%=userName%>. This action can not be reversed!</label>
+                        
+                        <input type="hidden" id="userId" name="userId" value="<%=userId%>">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <%include scripts%> 
+</body>

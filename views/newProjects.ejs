@@ -1,0 +1,65 @@
+<%include header%> 
+<body>
+    <%include adminNav%>
+      <main class="mt-5 pt-12">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-12">
+              <h4>New Projects</h4>
+            </div>
+          </div>
+                  
+          <div class="row">
+            <div class="col-md-12 mb-3">
+                <div id="project-cards">
+                
+                    <%projects.forEach((project) => {%>               
+                        <div class="card project-card" onclick="window.location.href='/admin/newProject?id=<%=project.id%>'">
+                            
+                          <img src="<%=project.path%>" class="card-img-top" alt="...">
+                          <div class="card-body border rounded-bottom">
+                            
+                            <!-- Title --><div class="h5 card-title"><%=project.title%></div>
+                            <!-- Description -->
+                            <!-- <p><%=project.description%></p> -->
+                            <hr>
+                            <ul class="list-unstyled d-flex justify-content-between mb-3 text-center small">
+                               <li class="pledged">
+                                  <p class="mb-1 font-weight-bold text-dark">Pledged</p>
+                                  <span class="amount"><%if(project.currencyId == 'GHS') {%><%=project.amountRequired.toLocaleString('en-GH', { style: 'currency', currency: 'GHS' });%><%}else {%><%=project.amountRequired.toLocaleString('en-GH', { style: 'currency', currency: 'CFA' });%><%}%></span> 
+                               </li>
+                               <li class="funded">
+                                  <p class="mb-1 font-weight-bold text-dark">Funded</p>
+                                  <!-- <%if(project.amountRecieved == null) { project.amountRecieved = 0;}%> -->
+                                  <span class="amount"><%if(project.currencyId == 'GHS') {%><%=project.amountRecieved.toLocaleString('en-GH', { style: 'currency', currency: 'GHS' });%><%}else {%><%=project.amountRecieved.toLocaleString('en-GH', { style: 'currency', currency: 'CFA' });%><%}%></span> 
+                               </li>
+                               <%var present_date = new Date();%>
+                               <%var difference = project.fundCampaignEndDate.getTime() - present_date.getTime();%>
+                               <%var days = Math.ceil(difference / (1000 * 3600 * 24));%>
+                               <li class="days">
+                                  <p class="mb-1 font-weight-bold text-dark">Days Left</p>
+                                  <span class="amount"><%=days%></span> 
+                               </li>
+                            </ul>
+                            <!-- <%if(project.amountRecieved === null) {%>
+                                <%const percent = 0;%>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="55" aria-valuemin="91" aria-valuemax="100" style="width: '<%=percent%>%';"><%=percent%>%</div>
+                                 </div>
+                            <%}else {%> -->
+                                <%var percent = (project.amountRecieved/project.amountRequired)*100;%>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="55" aria-valuemin="91" aria-valuemax="100" style="width: <%=parseInt(percent)%>%;"><%=parseInt(percent)%>%</div>
+                                 </div>
+                            <!-- <%}%>                    -->
+                            <!-- end: progress bard -->
+                            </div>
+                        </div>                
+                    <%})%>
+                    </div>    
+            </div>
+          </div>
+        </div>
+      </main>
+      <%include scripts%> 
+</body>

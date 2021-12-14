@@ -36,6 +36,9 @@ body {
   .offcanvas-backdrop::before {
     display: none;
   }
+  .offcanvas {
+    background-color: #8cbf3f;
+  }
   .sidebar-nav {
     -webkit-transform: none;
     transform: none;
@@ -212,7 +215,7 @@ footer {
   width: 100%;
   max-width: 400px;
   padding: 50px 30px;
-  background-image: linear-gradient(to bottom, #00BC7E, #108775);
+  background-image: linear-gradient(to bottom, #bbff54, #5d7f2a);
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
   border-radius: 16px;
 }
@@ -382,8 +385,13 @@ section:hover {
 .create-project {
   margin-left: 10%;
   margin-right: 10%;
+  margin-top: 80px;
   display: flex;
   justify-content: center;
+}
+
+.cp {
+  margin-top: 50px;
 }
 
 .createProject-form {
@@ -456,4 +464,26 @@ textarea {
   margin-top: 10%;
   /* margin-bottom: 20%; */
 }
+
+#deleteUser-form {
+  margin-left: 35%;
+  margin-right: 35%;
+  margin-top: 10%;
+  /* margin-bottom: 20%; */
+}
+
+.navbar {
+  background-color: #cae1a6;
+}
+
+#reviewPhotos {
+  display: flex;
+  justify-content: center;
+}
+
+#reviewPhoto {
+  margin: 20px;
+  width: 30%;
+}
+
 

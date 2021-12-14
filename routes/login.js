@@ -26,9 +26,9 @@ function(req, res) {
   if(req.user.roleId == '1') {
     res.redirect(`/admin/dashboard?id=${req.user.id}`);
   }else if(req.user.roleId == '2') {
-    res.redirect(`/admin/finAdmin?id=${req.user.id}`);
+    res.redirect(`/finAdmin?id=${req.user.id}`);
   }else if(req.user.roleId == '3') {
-    res.redirect(`/admin/reviewer?id=${req.user.id}`);
+    res.redirect(`/reviewer?id=${req.user.id}`);
   }else {
     res.redirect('/admin')
   }
