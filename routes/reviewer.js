@@ -6,7 +6,7 @@ const mailer = require('../modules/mailer');
 const auth = require('../modules/authenticate');
 
 router.get('/', auth.isLoggedIn, function(req, res, next) {
-    var sql = `SELECT project_details.id AS id, project_details.title AS title, project_details.description AS description, project_details.fundCampaignstartDate, project_details.fundCampaignEndDate, project_details.statusId AS projectStatusId, project_funding.amountRequired, project_funding.amountRecieved, project_funding.currencyId, photos.projectId, photos.path FROM project_details JOIN project_funding ON project_details.id = project_funding.projectId JOIN photos on project_funding.projectId = photos.projectId WHERE project_details.statusId = '6' GROUP BY photos.projectId`;
+    var sql = `SELECT project_details.id AS id, project_details.title AS title, project_details.description AS description, project_details.fundCampaignstartDate, project_details.fundCampaignEndDate, project_details.statusId AS projectStatusId, project_funding.amountRequired, project_funding.amountRecieved, project_funding.currencyId, photos.projectId, photos.path, project_review.reviewerId FROM project_details JOIN project_funding ON project_details.id = project_funding.projectId JOIN photos on project_funding.projectId = photos.projectId JOIN project_review ON project_details.id = project_review.projectId WHERE project_details.statusId = '6' GROUP BY photos.projectId`;
     con.query(sql, function (err, result) {
         if (err) throw err;
         console.log(result);
@@ -61,5 +61,23 @@ router.get('/reviewProject', auth.isLoggedIn, function(req, res, next) {
       })
     }); 
   });
+
+  router.post('/approveProject', auth.isLoggedIn, function(req, res, next) {
+    var sql = `UPDATE project_details SET statusId = '2' WHERE id = '${req.body.projectId}'`;
+    var sql2 = `UPDATE project_review SET remark = "${req.body.remarks}", decision = '${req.body.decision}' WHERE projectId = '${req.body.projectId}'`;
+    con.query(sql, function (err, result) {
+        if (err) throw err;
+        console.log(result);
+        con.query(sql2, function (err, result) {
+            if (err) throw err;
+            console.log(result);
+            const receipient = req.query.email;
+            const subject =  `Project Reviewed`;
+            const html = `<div><p>Hi! ${req.query.po}, your project title: <b>${req.query.title}</b> has been reviewed</p></div> <div><p>Thank you</p></div>`
+            mailer(receipient, subject, html);
+            res.redirect('/reviewer');
+        });
+    });
+});
 
 module.exports = router;

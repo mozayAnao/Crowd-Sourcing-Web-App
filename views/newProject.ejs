@@ -82,14 +82,56 @@
                         <br>
                         <br>
                         <button class="btn bg-info" data-bs-toggle="modal" data-bs-target="#assignReviewer">Assign Reviewer</button>
-                            
-                        
+                        <br>
+                        <br>
+                        <button class="btn bg-info" data-bs-toggle="modal" data-bs-target="#review">Review</button>                  
                         <br>
                         <br>
                         <button class="btn bg-danger" onclick="window.location.href='/projectOwner/editProject?id=<%=projectDetails[0].id%>'">Delete Project</button>
                         <br>
                     </div>
                 </div>
+
+                 <!-- Modal -->
+            <div class="modal" id="review" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content bg-light border-0">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Review</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <form class="" action="/admin/reviewProject?po=<%=projectOwner[0].name%>&email=<%=projectOwner[0].email%>&title=<%=projectDetails[0].title%>" method="post">
+                          <div class="mb-3">
+                            <label for="remarks" class="form-label"> Remarks:</label>
+                            <textarea 
+                              name="remarks" 
+                              id="remarks" 
+                              cols="30" 
+                              rows="10" 
+                              placeholder="Remarks" 
+                              required></textarea>
+                          </div> 
+                          <div class="mb-3">
+                            
+                            <label>
+                              <input type="radio" class="form-group" name="decision" value="8" required>
+                              Approve
+                            </label><br>
+                            <br>
+                            <label>
+                              <input type="radio" class="form-group" name="decision" value="7">
+                              Disapprove
+                            </label><br>
+                          
+                          </div> 
+                          <input type="hidden" name="projectId" value="<%=projectDetails[0].id%>">                           
+                          <button type="submit" class="btn btn-primary">Send</button>
+                        </form>
+                      </div>
+                  </div>
+              </div>
+            </div>
 
                    <!-- Modal -->
             <div class="modal fade" id="assignReviewer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

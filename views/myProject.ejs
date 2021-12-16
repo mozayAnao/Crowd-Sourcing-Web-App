@@ -24,21 +24,14 @@
             <div id="prj1" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photos[2].path%>" alt="" width="100%" height="400px"></div>
         </div>
         <div class="prj2">
-            <!-- <%if(projectFunding[0].amountRecieved == null) projectFunding[0].amountRecieved = 0;%> -->
+            
             <div><p>amount collected: <%if(projectFunding[0].currencyId == 'GHS') {%><%=projectFunding[0].amountRecieved.toLocaleString('en-GH', { style: 'currency', currency: 'GHS' });%><%}else {%><%=projectFunding[0].amountRecieved.toLocaleString('en-GH', { style: 'currency', currency: 'CFA' });%><%}%></p></div>
-            <div></div>
-            <!-- <%if(projectFunding[0].amountRecieved == null) {%>
-                <%var percent = 0;%>
-                <div class="progress mb-2">
-                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="55" aria-valuemin="91" aria-valuemax="100" style="width:'<%=percent%>%'"><%=percent%>%</div>
-                 </div>
-            <%}else {%> -->
+           
                 <%var percent = (projectFunding[0].amountRecieved/projectFunding[0].amountRequired)*100; console.log(percent); console.log(projectFunding[0].amountRecieved)%>
                 <div class="progress mb-2">
                     <div class="progress-bar bg-success" role="progressbar" aria-valuenow="55" aria-valuemin="91" aria-valuemax="100" style="width:<%=percent%>%;"><%=parseInt(percent)%>%</div>
                  </div>
-            <!-- <%}%>                    -->
-            <!-- end: progress bard -->
+           
             <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateTarget" title="Click to Edit"><p>target: <%if(projectFunding[0].currencyId == 'GHS') {%><%=projectFunding[0].amountRequired.toLocaleString('en-GH', { style: 'currency', currency: 'GHS' });%><%}else {%><%=projectFunding[0].amountRequired.toLocaleString('en-GH', { style: 'currency', currency: 'CFA' });%><%}%></p></div>
             <br>
             <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateDates" title="Click to Edit fundraiser campaign dates"><b>Fundraiser Campaign days left:</b></div>
@@ -47,23 +40,7 @@
             <%var days = Math.ceil(difference / (1000 * 3600 * 24));%>
             <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateDates" title="Click to Edit fundraiser campaign dates"><b><%=days%></b></div> 
 
-            <br>
-            <div><p>project status:</p></div>
-            <%if(projectDetails[0].statusId == 1) {%>
-                <button class="btn bg-info">Pending Review</button>
-                <%}else if(projectDetails[0].statusId == 6) {%>
-                  <button class="btn bg-info">Under Review</button>
-                  <%}else if(projectDetails[0].statusId == 2) {%>
-                      <button class="btn bg-primary">Reviewed</button>
-                      <%}else {%>
-                          <button class="btn bg-success">Published</button>
-                          <%}%>
-            <br>
-            <br>
-            <br>
-            <br>
-            <button class="btn bg-dark" onclick="window.location.href='/projectOwner/editProject?id=<%=projectDetails[0].id%>'">Delete Project</button>
-            <br>
+            
             <br>
             <br>
             <div>
@@ -78,8 +55,66 @@
                 <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateSocial" title="Click to Edit"><ion-icon name="logo-twitter"></ion-icon> <%=socialMedia[2].link%></div>
                 <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateSocial" title="Click to Edit"><ion-icon name="logo-instagram"></ion-icon> <%=socialMedia[3].link%></div>
             </div>
+            <br>
+            <br>
+            <br>
+            <div><p>project status:</p></div>
+            <%if(projectDetails[0].statusId == 1) {%>
+                <button class="btn bg-info">Pending Review</button>
+                <%}else if(projectDetails[0].statusId == 6) {%>
+                  <button class="btn bg-info">Under Review</button>
+                  <%}else if(projectDetails[0].statusId == 2) {%>
+                      <button class="btn bg-primary">Reviewed</button>
+                      <%}else {%>
+                          <button class="btn bg-success">Published</button>
+                          <%}%>
+            
+            <br>
+            <br>
+            <button class="btn bg-info" data-bs-toggle="modal" data-bs-target="#paymentOption">Payment Info</button>
+            <br>
+            <br>
+            <button class="btn bg-dark" onclick="window.location.href='/projectOwner/editProject?id=<%=projectDetails[0].id%>'">Delete Project</button>
+            <br>
         </div>
     </div>
+
+    <div class="modal" id="paymentOption" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-light">
+          <div class="modal-header">
+            <h5 class="modal-title">Payment Info</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <%if(mobilePay.length) {%>
+              <div><h4>Mobile Money</h4></div>
+              <div><b>Agent: </b><%=mobilePay[0].agent%></div>
+              <div><b>Account Number: </b><%=mobilePay[0].acc_number%></div>
+              <div><b>Account Name: </b><%=mobilePay[0].acc_name%></div>
+              <%}else if(bankPay.length) {%>
+                <div><h4>Bank</h4></div>
+                <div><b>Bank name: </b><%=bankPay[0].bankName%></div>
+                <div><b>Branch: </b><%=bankPay[0].bankBranch%></div>
+                <div><b>Bank address: </b><%=bankPay[0].bankAddress%></div>
+                <div><b>Account name: </b><%=bankPay[0].accountName%></div>
+                <div><b>Account Number: </b><%=bankPay[0].accountNumber%></div>
+                <div><b>Routine Number: </b><%=bankPay[0].routineNumber%></div>
+                <div><b>Swift code: </b><%=bankPay[0].swiftCode%></div>
+                <%}else {%>
+                  <div><p>No payment information provided.</p></div>
+                  <div><a href="/projectOwner/payInfo?id=<%=projectDetails[0].id%>">Click here</a> to add payment information</div>
+                  <%}%>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <!-- Modal -->
 <div class="modal fade" id="updateSocial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

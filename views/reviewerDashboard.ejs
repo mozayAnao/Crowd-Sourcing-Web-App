@@ -12,10 +12,11 @@
             <div class="col-md-12 mb-3">
               <div id="project-cards">
                 
-                <%projects.forEach((project) => {%>               
+                <%projects.forEach((project) => {%>
+                    <%if(project.reviewerId == user.id) {%>               
                     <div class="card project-card" onclick="window.location.href='/reviewer/reviewProject?id=<%=project.id%>'">
                         
-                      <img src="<%=project.path%>" class="card-img-top" alt="...">
+                      <img src="<%=project.path%>" class="card-img-top" alt="..." style="object-fit: fill; width: 100%; height: 300;">
                       <div class="card-body border rounded-bottom">
                         
                         <!-- Title --><div class="h5 card-title"><%=project.title%></div>
@@ -53,7 +54,8 @@
                         <!-- <%}%>                    -->
                         <!-- end: progress bard -->
                         </div>
-                    </div>                
+                    </div>    
+                    <%}%>            
                 <%})%>
                 </div>
             </div>

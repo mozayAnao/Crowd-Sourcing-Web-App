@@ -32,6 +32,8 @@ router.get('/myProject', auth.isLoggedIn, function(req, res, next) {
   var sql3 = `SELECT * FROM photos WHERE projectId = '${req.query.id}'`;
   var sql4 = `SELECT * FROM addresses WHERE id = '${req.query.id}'`;
   var sql5 = `SELECT * FROM social_media_links WHERE projectId = '${req.query.id}'`;
+  var sql6 = `SELECT * FROM bank_account_details WHERE projectId = '${req.query.id}'`;
+  var sql7 = `SELECT * FROM mobile_money_details WHERE projectId = '${req.query.id}'`;
   con.query(sql, function (err, projectDetails) {
     if (err) throw err;
     console.log(projectDetails);
@@ -47,21 +49,29 @@ router.get('/myProject', auth.isLoggedIn, function(req, res, next) {
           con.query(sql5, function (err, socialMedia) {
             if (err) throw err;
             console.log(socialMedia);
-            res.render('myProject', { 
-              user : req.user,
-              projectDetails: projectDetails,
-              projectFunding: projectFunding,
-              photos: photos,
-              address: address,
-              socialMedia: socialMedia
+            con.query(sql6, function (err, bankPay) {
+              if (err) throw err;
+              console.log(bankPay);
+              con.query(sql7, function (err, mobilePay) {
+                if (err) throw err;
+                console.log(mobilePay);
+                res.render('myProject', { 
+                  user : req.user,
+                  projectDetails: projectDetails,
+                  projectFunding: projectFunding,
+                  photos: photos,
+                  address: address,
+                  socialMedia: socialMedia,
+                  mobilePay: mobilePay,
+                  bankPay: bankPay
+                });
+              });
             });
           });
+        });
       });
-    });
-    
     })
-  });
-  
+  }); 
 });
 
 
@@ -178,28 +188,53 @@ router.post('/saveProject', auth.isLoggedIn, upload.array('initialPhotos', 3), f
         if(err) console.log(err);                
             con.query(insertQuery4,[projectId, "youTube", req.body.youtubelink], function(err, rows) {
               if(err) console.log(err);
-              if(req.body.facebooklink != "") {
+              
                 con.query(insertQuery4,[projectId, "facebook", req.body.facebooklink], function(err, rows) {
                   if(err) console.log(err);
-                  if(req.body.twitterlink != "") {
+                  
                     con.query(insertQuery4,[projectId, "twitter", req.body.twitterlink], function(err, rows) {
                       if(err) console.log(err);
-                      if(req.body.instagramlink != "") {
+                      
                         con.query(insertQuery4,[projectId, "instagram", req.body.instagramlink], function(err, rows) {
                           if(err) console.log(err);
                           con.query(insertQuery5,[projectId, req.body.amount, req.body.currency], function(err, rows) {
                             if(err) console.log(err);
-                            res.redirect('/myProjects')
+                            res.redirect('/projectOwner/myProjects')
                           })
                         })
-                      }
+                      
                     })
-                  }
+                  
                 })
-              }
+              
             })       
       })
     });  
+});
+
+router.get('/payInfo', auth.isLoggedIn, function(req, res, next) { 
+  res.render('payInfo', { 
+    user : req.user,
+    projectId: req.query.id
+  });  
+});
+
+router.post('/saveMomo', auth.isLoggedIn, function(req, res, next) { 
+  console.log(req.body)
+  var sql = "INSERT INTO mobile_money_details ( projectId, agent, acc_name, acc_number) VALUES (?,?,?,?)";
+  con.query(sql,[req.query.id, req.body.agent, req.body.accName, req.body.accNumber], function(err, rows) {
+    if(err) console.log(err);
+      res.redirect(`/projectOwner/myProject?id=${req.query.id}`); 
+    }); 
+});
+
+router.post('/saveBank', auth.isLoggedIn, function(req, res, next) { 
+  console.log(req.body)
+  var sql = "INSERT INTO bank_account_details ( projectId, bankName, bankBranch, bankAddress, accountName, accountNumber, routineNumber, swiftCode) VALUES (?,?,?,?,?,?,?,?)";
+  con.query(sql,[req.query.id, req.body.bankName, req.body.branch, req.body.address, req.body.accName, req.body.accNumber, req.body.routeNUmber, req.body.sCode], function(err, rows) {
+    if(err) console.log(err);
+      res.redirect(`/projectOwner/myProject?id=${req.query.id}`); 
+    }); 
 });
 
 module.exports = router;

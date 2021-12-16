@@ -1,16 +1,6 @@
 <%include header%> 
 <body>
-    <%include adminNav%>
-      <main class="mt-5 pt-12">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12">
-              <h4>New Project</h4>
-            </div>
-          </div>
-                  
-          <div class="row">
-            <div class="col-md-12 mb-3">
+    <%include navbar%>
                 <div class="myProjectContainer">
                     <div class="prj1">
                         <div id="prj1"><h2><%=projectDetails[0].title%></h2></div>
@@ -41,27 +31,24 @@
                         </div>
                     </div>
                     <div class="prj2">
-                        <!-- <%if(projectFunding[0].amountRecieved == null) projectFunding[0].amountRecieved = 0;%> -->
-                        <!-- <div><p>amount collected: <%if(projectFunding[0].currencyId == 'GHS') {%><%=projectFunding[0].amountRecieved.toLocaleString('en-GH', { style: 'currency', currency: 'GHS' });%><%}else {%><%=projectFunding[0].amountRecieved.toLocaleString('en-GH', { style: 'currency', currency: 'CFA' });%><%}%></p></div> -->
-                        <div></div>
-                        <!-- <%if(projectFunding[0].amountRecieved == null) {%>
-                            <%var percent = 0;%>
-                            <div class="progress mb-2">
-                                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="55" aria-valuemin="91" aria-valuemax="100" style="width:'<%=percent%>%'"><%=percent%>%</div>
-                             </div>
-                        <%}else {%> -->
-                            <!-- <%var percent = (projectFunding[0].amountRecieved/projectFunding[0].amountRequired)*100; console.log(percent); console.log(projectFunding[0].amountRecieved)%>
-                            <div class="progress mb-2">
-                                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="55" aria-valuemin="91" aria-valuemax="100" style="width:<%=percent%>%;"><%=parseInt(percent)%>%</div>
-                             </div> -->
-                        <!-- <%}%>                    -->
-                        <!-- end: progress bard -->
-                        <div id="prj2"><p><b>Target:</b>  <%if(projectFunding[0].currencyId == 'GHS') {%><%=projectFunding[0].amountRequired.toLocaleString('en-GH', { style: 'currency', currency: 'GHS' });%><%}else {%><%=projectFunding[0].amountRequired.toLocaleString('en-GH', { style: 'currency', currency: 'CFA' });%><%}%></p></div>
+
+                      <button class="btn bg-info" data-bs-toggle="modal" data-bs-target="#approve">Donate</button>
+                      <br>
+                      <br>
+                        <div><p>amount collected: <%if(projectFunding[0].currencyId == 'GHS') {%><%=projectFunding[0].amountRecieved.toLocaleString('en-GH', { style: 'currency', currency: 'GHS' });%><%}else {%><%=projectFunding[0].amountRecieved.toLocaleString('en-GH', { style: 'currency', currency: 'CFA' });%><%}%></p></div>
+           
+                        <%var percent = (projectFunding[0].amountRecieved/projectFunding[0].amountRequired)*100; console.log(percent); console.log(projectFunding[0].amountRecieved)%>
+                        <div class="progress mb-2">
+                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="55" aria-valuemin="91" aria-valuemax="100" style="width:<%=percent%>%;"><%=parseInt(percent)%>%</div>
+                         </div>
+                   
+                        <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateTarget" title="Click to Edit"><p>target: <%if(projectFunding[0].currencyId == 'GHS') {%><%=projectFunding[0].amountRequired.toLocaleString('en-GH', { style: 'currency', currency: 'GHS' });%><%}else {%><%=projectFunding[0].amountRequired.toLocaleString('en-GH', { style: 'currency', currency: 'CFA' });%><%}%></p></div>
                         <br>
-                        <div id="prj2"><b>Fundraiser Campaign Dates:</b></div>
-                        <br>
-                        <div id="prj2"><b>Start: </b><%=projectDetails[0].fundCampaignStartDate.toLocaleDateString("en-GH")%></div>
-                        <div id="prj2"><b>End: </b><%=projectDetails[0].fundCampaignEndDate.toLocaleDateString("en-GH")%></div> 
+                        <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateDates" title="Click to Edit fundraiser campaign dates"><b>Fundraiser Campaign days left:</b></div>
+                        <%var present_date = new Date();%>
+                        <%var difference = projectDetails[0].fundCampaignEndDate.getTime() - present_date.getTime();%>
+                        <%var days = Math.ceil(difference / (1000 * 3600 * 24));%>
+                        <div id="prj2" type="button" data-bs-toggle="modal" data-bs-target="#updateDates" title="Click to Edit fundraiser campaign dates"><b><%=days%></b></div>  
             
                         <br>                       
                         <div>
@@ -84,7 +71,7 @@
                         <div><b>Phone Number: </b><%=projectOwner[0].phoneNumber%></div>
                         <br>
                         <br>
-                        <button class="btn bg-info" data-bs-toggle="modal" data-bs-target="#approve">Remarks</button>
+                        
                             
                         
                         <br>
@@ -104,7 +91,7 @@
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="" action="/reviewer/approveProject?po=<%=projectOwner[0].name%>&email=<%=projectOwner[0].email%>&title=<%=projectDetails[0].title%>" method="post">
+                        <form class="" action="/reviewer/approveProject" method="post">
                             <div class="mb-3">
                               <label for="remarks" class="form-label"> Remarks:</label>
                               <textarea 
@@ -135,9 +122,6 @@
                     </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </main>
       <%include scripts%> 
+      <%include footer%>
 </body>

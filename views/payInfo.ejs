@@ -1,0 +1,92 @@
+<%include header%> 
+<%-include('navbarAuthenticated', {user: user})-%>
+
+<body>
+    <div id="payInfo">
+        <div><h5>Choose prefered payment option</h5></div>
+        <br>
+        <br>
+        <div style="display: flex; justify-content: center;">
+            <div style="width: 45%;" type="button" data-bs-toggle="modal" data-bs-target="#momo"><div style="display: flex; justify-content: center;"><img src="/images/MTN-Mobile-Money-Logo-200x200-1.png" alt="" style="width: 150; height: 150;"></div><div style="text-align: center;">Mobile money</div></div>
+            <div style="width: 45%;" type="button" data-bs-toggle="modal" data-bs-target="#bank"><div style="display: flex; justify-content: center;"><img src="/images/bankpay.png" alt="" style="height: 150; width: 150;"></div><div style="text-align: center;">Bank</div></div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal" id="bank" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-bg">
+          <div class="modal-content bg-light border-0">
+            <div class="modal-header">
+              <h5 class="modal-title">Bank Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <form action="/projectOwner/saveBank?id=<%=projectId%>" method="post">
+                <div class="mb-3">
+                    <label for="bankName" class="form-label">Bank Name</label>
+                    <input type="text" class="form-control" id="bankName" name="bankName" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <label for="branch" class="form-label">Branch</label>
+                    <input type="text" class="form-control" id="branch" name="branch" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <label for="address" class="form-label">Bank address</label>
+                    <input type="text" class="form-control" id="address" name="address" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <label for="accName" class="form-label">Account name</label>
+                    <input type="text" class="form-control" id="accName" name="accName" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <label for="accNumber" class="form-label">Account number</label>
+                    <input type="text" class="form-control" id="accNumber" name="accNumber" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <label for="routeNumber" class="form-label">Routine Number</label>
+                    <input type="text" class="form-control" id="routeNumber" name="routeNumber" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <label for="sCode" class="form-label">Swift Code</label>
+                    <input type="text" class="form-control" id="sCode" name="sCode" aria-describedby="emailHelp">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Save</button>
+               </form>
+                </div>
+            </div>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal" id="momo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-bg">
+          <div class="modal-content bg-light border-0">
+            <div class="modal-header">
+              <h5 class="modal-title">Mobile Money Account Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+               <form action="/projectOwner/saveMomo?id=<%=projectId%>" method="post">
+                <div class="mb-3">
+                    <label for="agent" class="form-label">Agent</label>
+                    <!-- <input type="text" class="form-control" id="bankName" name="bankName" aria-describedby="emailHelp"> -->
+                    <select name="agent" id="agent" class="form-control">
+                        <option value="MTN">MTN</option>
+                        <option value="Voda">Vodafone</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="accName" class="form-label">Account name</label>
+                    <input type="text" class="form-control" id="accName" name="accName" aria-describedby="emailHelp">
+                  </div>
+                  <div class="mb-3">
+                    <label for="accNumber" class="form-label">Account number</label>
+                    <input type="text" class="form-control" id="accNumber" name="accNumber" aria-describedby="emailHelp">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Save</button>
+               </form>
+                </div>
+            </div>
+        </div>
+      </div>     
+      <%include scripts%>    
+</body>

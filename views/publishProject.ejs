@@ -5,7 +5,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
-              <h4>New Project</h4>
+              <h4>Publish Project</h4>
             </div>
           </div>
                   
@@ -13,6 +13,18 @@
             <div class="col-md-12 mb-3">
                 <div class="myProjectContainer">
                     <div class="prj1">
+                        <div id="prj1"><h2>Reviewer's Remarks</h2></div>
+                        <div id="prj1"><%=review[0].remark%></div>
+                        <%if(review[0].decision === '8') {%>
+                                <button class="btn bg-success">Approved</button>
+                                    <%}else {%>
+                                        <button class="btn bg-danger">Rejected</button>
+                                        <%}%> 
+                        <br>
+                        <br>
+                        <div><b>Reviewer: </b><%=reviewer[0].name%></div>
+                        <br>
+                        <br>
                         <div id="prj1"><h2><%=projectDetails[0].title%></h2></div>
                         <div id="prj1"><p>by <%=projectDetails[0].organizationName%></p></div>
                         <br>
@@ -41,21 +53,7 @@
                         </div>
                     </div>
                     <div class="prj2">
-                        <!-- <%if(projectFunding[0].amountRecieved == null) projectFunding[0].amountRecieved = 0;%> -->
-                        <!-- <div><p>amount collected: <%if(projectFunding[0].currencyId == 'GHS') {%><%=projectFunding[0].amountRecieved.toLocaleString('en-GH', { style: 'currency', currency: 'GHS' });%><%}else {%><%=projectFunding[0].amountRecieved.toLocaleString('en-GH', { style: 'currency', currency: 'CFA' });%><%}%></p></div> -->
-                        <div></div>
-                        <!-- <%if(projectFunding[0].amountRecieved == null) {%>
-                            <%var percent = 0;%>
-                            <div class="progress mb-2">
-                                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="55" aria-valuemin="91" aria-valuemax="100" style="width:'<%=percent%>%'"><%=percent%>%</div>
-                             </div>
-                        <%}else {%> -->
-                            <!-- <%var percent = (projectFunding[0].amountRecieved/projectFunding[0].amountRequired)*100; console.log(percent); console.log(projectFunding[0].amountRecieved)%>
-                            <div class="progress mb-2">
-                                <div class="progress-bar bg-success" role="progressbar" aria-valuenow="55" aria-valuemin="91" aria-valuemax="100" style="width:<%=percent%>%;"><%=parseInt(percent)%>%</div>
-                             </div> -->
-                        <!-- <%}%>                    -->
-                        <!-- end: progress bard -->
+                        
                         <div id="prj2"><p><b>Target:</b>  <%if(projectFunding[0].currencyId == 'GHS') {%><%=projectFunding[0].amountRequired.toLocaleString('en-GH', { style: 'currency', currency: 'GHS' });%><%}else {%><%=projectFunding[0].amountRequired.toLocaleString('en-GH', { style: 'currency', currency: 'CFA' });%><%}%></p></div>
                         <br>
                         <div id="prj2"><b>Fundraiser Campaign Dates:</b></div>
@@ -78,33 +76,70 @@
                         </div>
                         <br>
                         <br>
+                        <div>
+                            <div><b>Payment Information</b></div>
+                            <br>
+                            <%if(mobilePay.length) {%>
+                                <div><h5>Mobile Money</h5></div>
+                                <div><b>Agent: </b><%=mobilePay[0].agent%></div>
+                                <div><b>Account Number: </b><%=mobilePay[0].acc_number%></div>
+                                <div><b>Account Name: </b><%=mobilePay[0].acc_name%></div>
+                                <%}else if(bankPay.length) {%>
+                                  <div><h5>Bank</h5></div>
+                                  <div><b>Bank name: </b><%=bankPay[0].bankName%></div>
+                                  <div><b>Branch: </b><%=bankPay[0].bankBranch%></div>
+                                  <div><b>Bank address: </b><%=bankPay[0].bankAddress%></div>
+                                  <div><b>Account name: </b><%=bankPay[0].accountName%></div>
+                                  <div><b>Account Number: </b><%=bankPay[0].accountNumber%></div>
+                                  <div><b>Routine Number: </b><%=bankPay[0].routineNumber%></div>
+                                  <div><b>Swift code: </b><%=bankPay[0].swiftCode%></div>
+                                  <%}else {%>
+                                    <div><p>No payment information provided.</p></div>
+                                    <button class="btn bg-info" onclick="window.location.href='/admin/requestPayInfo?id=<%=projectDetails[0].id%>&title=<%=projectDetails[0].title%>&name=<%=projectOwner[0].name%>&email=<%=projectOwner[0].email%>'">Request Pay Info</button>
+                                    <%}%>
+                        </div>
+                        <br>
+                        <br>
                         <div><b>Project Owner</b></div>
                         <div><b>Name: </b><%=projectOwner[0].name%></div>
                         <div><b>Email: </b><%=projectOwner[0].email%></div>
                         <div><b>Phone Number: </b><%=projectOwner[0].phoneNumber%></div>
                         <br>
                         <br>
-                        <button class="btn bg-info" data-bs-toggle="modal" data-bs-target="#approve">Remarks</button>
+                        <button class="btn bg-success" data-bs-toggle="modal" data-bs-target="#publish">Publish</button>
                             
                         
                         <br>
                         <br>
-                        <!-- <button class="btn bg-danger" data-bs-toggle="modal" data-bs-target="#reject">Reject Project</button> -->
+                        <button class="btn bg-danger" data-bs-toggle="modal" data-bs-target="#reject">Reconsider</button>
                         <br>
                     </div>
                 </div>
 
+                <div class="modal" id="publish" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content bg-light">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Publish Project</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <p>Are you sure you want to publish this project?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" onclick="window.location.href='/admin/publish?projectId=<%=projectDetails[0].id%>&po=<%=projectOwner[0].name%>&email=<%=projectOwner[0].email%>&title=<%=projectDetails[0].title%'">Confirm</button>
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
                 <!-- Modal -->
-            <div class="modal" id="approve" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-xl">
-                  <div class="modal-content bg-light border-0">
-                    <div class="modal-header">
-                      <h5 class="modal-title">Review</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form class="" action="/reviewer/approveProject?po=<%=projectOwner[0].name%>&email=<%=projectOwner[0].email%>&title=<%=projectDetails[0].title%>" method="post">
+            <div class="modal fade" id="approve" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content bg-transparent border-0">
+                        <form class="frm" action="/reviewer/approveProject" method="post">
                             <div class="mb-3">
                               <label for="remarks" class="form-label"> Remarks:</label>
                               <textarea 
@@ -115,26 +150,38 @@
                                 placeholder="Remarks" 
                                 required></textarea>
                             </div> 
-                            <div class="mb-3">
-                              
-                              <label>
-                                <input type="radio" class="form-group" name="decision" value="8" required>
-                                Approve
-                              </label><br>
-                              <br>
-                              <label>
-                                <input type="radio" class="form-group" name="decision" value="7">
-                                Disapprove
-                              </label><br>
-                            
-                            </div> 
                             <input type="hidden" name="projectId" value="<%=projectDetails[0].id%>">                           
-                            <button type="submit" class="btn btn-primary">Send</button>
+                            <button type="submit" class="btn btn-primary">Approve</button>
                           </form>
-                        </div>
                     </div>
                 </div>
               </div>
+
+               <!-- Modal -->
+            <div class="modal fade" id="reject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content bg-transparent border-0">
+                        <form class="frm" action="/reviewer/rejectProject" method="post">
+                            <div class="mb-3">
+                              <label for="remarks" class="form-label"> Remarks:</label>
+                              <textarea 
+                                name="remarks" 
+                                id="remarks" 
+                                cols="30" 
+                                rows="10" 
+                                placeholder="Remarks" 
+                                required></textarea>                         
+                            </div> 
+                            <input type="hidden" name="projectId" value="<%=projectDetails[0].id%>">                           
+                            <button type="submit" class="btn btn-primary">Reject</button>
+                          </form>
+                    </div>
+                </div>
+              </div>
+            
+            
+            
+              
             </div>
           </div>
         </div>

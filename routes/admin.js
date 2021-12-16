@@ -213,15 +213,144 @@ router.post('/assignReviewer', auth.isLoggedIn, function(req, res, next) {
   console.log(req.body)
   const sql = `INSERT INTO project_review (projectId, reviewerId) VALUES (?,?)`;
   const sql2 = `UPDATE project_details SET statusId = '6' WHERE id = '${req.body.projectId}'`;
+  const sql3 = `SELECT * FROM users WHERE id = ${req.body.reviewerId}`
   con.query(sql, [req.body.projectId, req.body.reviewerId], function (err, result) {
     if (err) throw err;
     console.log(result)
     con.query(sql2, function (err, result) {
       if (err) throw err;
       console.log(result)
-      res.redirect(`/admin/newProjects`)
+      con.query(sql3, function (err, reviewer) {
+        if (err) throw err;
+        console.log(reviewer)
+        const receipient = reviewer.email;
+        const subject =  `New Project`;
+        const html = `<div><p>Hi! ${reviewer.name}, A new project has been assigned to you to review. Please open your portal to view</p></div> <div><p>Thank you</p></div>`
+        mailer(receipient, subject, html);
+        res.redirect(`/admin/newProjects`)
+      })
     })
   })
+});
+
+router.post('/reviewProject', auth.isLoggedIn, function(req, res, next) {
+  var sql = `UPDATE project_details SET statusId = '2' WHERE id = '${req.body.projectId}'`;
+  var sql2 = `INSERT INTO project_review (projectId, reviewerId, remark, decision) VALUES (?,?,?,?)`
+  // var sql2 = `UPDATE project_review SET remark = "${req.body.remarks}", decision = '${req.body.decision}' WHERE projectId = '${req.body.projectId}'`;
+  con.query(sql, function (err, result) {
+      if (err) throw err;
+      console.log(result);
+      con.query(sql2, [req.body.projectId, req.user.id, req.body.remarks, req.body.decision], function (err, result) {
+          if (err) throw err;
+          console.log(result);
+          const receipient = req.query.email;
+          const subject =  `Project Reviewed`;
+          const html = `<div><p>Hi! ${req.query.po}, your project title: <b>${req.query.title}</b> has been reviewed</p></div> <div><p>Thank you</p></div>`
+          mailer(receipient, subject, html);
+          res.redirect('/admin/newProjects');
+      });
+  });
+});
+
+router.get('/reviewedProjects', auth.isLoggedIn, function(req, res, next) {
+  var sql = `SELECT project_details.id AS id, project_details.title AS title, project_details.description AS description, project_details.fundCampaignstartDate, project_details.fundCampaignEndDate, project_details.statusId AS projectStatusId, project_funding.amountRequired, project_funding.amountRecieved, project_funding.currencyId, photos.projectId, photos.path FROM project_details JOIN project_funding ON project_details.id = project_funding.projectId JOIN photos on project_funding.projectId = photos.projectId WHERE project_details.statusId = '2' GROUP BY photos.projectId`;
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log(result);
+    res.render('reviewedProjects', { 
+      user : req.user,
+      projects: result 
+    })
+  });
+  
+});
+
+router.get('/publishProject', auth.isLoggedIn, function(req, res, next) {
+  var sql = `SELECT * FROM project_details WHERE id = '${req.query.id}'`;
+  var sql2 = `SELECT * FROM project_funding WHERE projectId = '${req.query.id}'`;
+  var sql3 = `SELECT * FROM photos WHERE projectId = '${req.query.id}'`;
+  var sql4 = `SELECT * FROM addresses WHERE id = '${req.query.id}'`;
+  var sql5 = `SELECT * FROM social_media_links WHERE projectId = '${req.query.id}'`;
+  var sql6 = `SELECT users.id AS userId, users.name, users.email, users.phoneNumber, project_details.id FROM users JOIN project_details ON users.id = project_details.projectOwnerId WHERE project_details.id = '${req.query.id}'`;
+  var sql7 = `SELECT * FROM project_review WHERE projectId = '${req.query.id}'`;
+  var sql8 = `SELECT * FROM bank_account_details WHERE projectId = '${req.query.id}'`;
+  var sql9 = `SELECT * FROM mobile_money_details WHERE projectId = '${req.query.id}'`;
+  con.query(sql, function (err, projectDetails) {
+    if (err) throw err;
+    console.log(projectDetails);
+    con.query(sql2, function (err, projectFunding) {
+      if (err) throw err;
+      console.log(projectFunding);
+      con.query(sql3, function (err, photos) {
+        if (err) throw err;
+        console.log(photos);
+        con.query(sql4, function (err, address) {
+          if (err) throw err;
+          console.log(address);
+          con.query(sql5, function (err, socialMedia) {
+            if (err) throw err;
+            console.log(socialMedia);
+            con.query(sql6, function (err, projectOwner) {
+              if (err) throw err;
+              console.log(projectOwner);
+              con.query(sql7, function (err, review) {
+                if (err) throw err;
+                console.log(review);
+                con.query(`SELECT * FROM users WHERE id = '${review[0].reviewerId}'`, function (err, reviewer) {
+                  if (err) throw err;
+                  console.log(reviewer);
+                  con.query(sql8, function (err, bankPay) {
+                    if (err) throw err;
+                    console.log(bankPay);
+                    con.query(sql9, function (err, mobilePay) {
+                      if (err) throw err;
+                      console.log(mobilePay);
+                      res.render('publishProject', { 
+                        user : req.user,
+                        projectDetails: projectDetails,
+                        projectFunding: projectFunding,
+                        photos: photos,
+                        address: address,
+                        socialMedia: socialMedia,
+                        projectOwner: projectOwner,
+                        review: review,
+                        reviewer: reviewer,
+                        mobilePay: mobilePay,
+                        bankPay: bankPay
+                      });
+                    });
+                  });
+                });
+              });
+            })
+          });
+        });
+      });
+    })
+  }); 
+});
+
+router.get('/requestPayInfo', auth.isLoggedIn, function(req, res, next) {
+  console.log(req.query)
+  const receipient = req.query.email;
+  const subject =  `Payment Information`;
+  const html = `<div><p>Hi! ${req.query.name}, please provide payment information for your project title: <b>${req.query.title}</b>. This will qualify your project to be published</p></div> <div><p>Thank you</p></div>`
+  mailer(receipient, subject, html);
+    res.redirect(`/admin/publishProject?id=${req.query.id}`)  
+});
+
+router.get('/publish', auth.isLoggedIn, function(req, res, next) {
+  var sql = `UPDATE project_details SET statusId = '3' WHERE id = '${req.query.projectId}'`;
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log(result);
+    const receipient = req.query.email;
+    const subject =  `Project Pulished`;
+    const html = `<div><p>Hi! ${req.query.po}, your project title: <b>${req.query.title}</b> has been published. Please make sure payment information has been provided</p></div> <div><p>Thank you</p></div>`
+    mailer(receipient, subject, html);
+    res.redirect(`/admin/reviewedProjects`)
+  });
+  
 });
 
 module.exports = router;
