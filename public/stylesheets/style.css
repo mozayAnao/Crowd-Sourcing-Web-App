@@ -2,14 +2,20 @@
   box-sizing: border-box;
 }
 
+bg-white{
+  background: #f2f2f2;
+}
+
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #f2f2f2;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif, poppins;
   height: 100%;
 }
 
 :root {
   --offcanvas-width: 270px;
   --topNavbarHeight: 80px;
+  --whiteColor:#f2f2f2;
 }
 .sidebar-nav {
   width: var(--offcanvas-width);
@@ -49,7 +55,7 @@ body {
 }
 
 a {
-  color: #2e2f30;
+  color: green;
 }
 
 #loginContain {
@@ -57,10 +63,10 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
+  /* margin-top: 10px;
   margin-bottom: 5px;
   padding-top: 10px;
-  font-size: 12px;
+  font-size: 12px; */
 }
 
 #termsPolicies {
@@ -113,14 +119,6 @@ a {
   padding: 20px;
 }
 
-.container {
-  display: flex;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px;
-}
-
 .footer-sections {
   width: 30%;
   margin-right: 3%;
@@ -146,7 +144,7 @@ a {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
-
+/* 
 .btn {
   color: #ffffff;
   background-color: #428BCA;
@@ -165,7 +163,7 @@ a {
 
 .btn:active {
   box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
-}
+} */
 
 .alert {
   padding: 15px;
@@ -190,9 +188,6 @@ footer {
   background-color: gray;
 }
 
-.btn {
-  background-color: green;
-}
 
 .app {
   display: flex;
@@ -205,7 +200,7 @@ footer {
 .home {
   max-width: 400px;
   padding: 50px 30px;
-  background-color: #ffffff;
+  background-color: #f0ecec;
   border-radius: 16px ;
   text-align: center;
 }
@@ -215,13 +210,14 @@ footer {
   width: 100%;
   max-width: 400px;
   padding: 50px 30px;
-  background-image: linear-gradient(to bottom, #bbff54, #5d7f2a);
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
-  border-radius: 16px;
+  background-image: rgb(240, 240, 240);
+  /* box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); */
+  border-radius: 5px;
 }
 
 .signup-form {
   max-width: 1000px;
+  background: rgb(241, 241, 241);
 }
 
 .frm h1 {
@@ -240,15 +236,14 @@ footer {
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-.frm .form-group {
-  margin-bottom: 30px;
-}
+
 
 .frm label {
   display: block;
   color: rgb(29, 28, 28);
   font-size: 16px;
   margin-bottom: 5px;
+  transform: capitalize;
 }
 
 .frm select {
@@ -291,17 +286,16 @@ footer {
   width: 100%;
   padding: 15px;
   border-radius: 8px;
-  background-color: #2F4960;
+  background-color: #79a00a;
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
   transition: 0.4s;
   color: #fff;
   font-size: 20px;
-  font-weight: 700;
   cursor: pointer;
 }
 
 
-#featured {
+/* #featured {
   margin-top: 80px;
   margin-left: 15%;
   margin-right: 15%;
@@ -310,12 +304,12 @@ footer {
 
 #featured-title {
   margin-bottom: 50px;
-}
+} */
 
 #project-cards {
   display: flex;
   flex-wrap: wrap;
-  /* justify-content: center; */
+  justify-content: center;
 }
 
 .project-card {
@@ -324,12 +318,7 @@ footer {
   max-width: 25em; */
   margin-bottom: 20px;
   width: 30%;
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
-}
-
-.card-image {
-  width: 100%;
-  height: 50px;
+  /* box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); */
 }
 
 .card:hover {
@@ -343,6 +332,7 @@ footer {
 
 .nav-item {
   margin-right: 20px;
+  color: white;
 }
 
 .myProjectPage {
@@ -369,7 +359,7 @@ footer {
   margin-bottom: 50px;
 }
 
-section {
+/* section {
   text-align: center;
   border: 20px solid green;
   border-radius: 10%;
@@ -385,7 +375,7 @@ section:hover {
   cursor: pointer;
   background-color: #00BC7E;
   color: #fff;
-}
+} */
 
 .create-project {
   margin-left: 10%;
@@ -395,21 +385,27 @@ section:hover {
   justify-content: center;
 }
 
-.cp {
-  margin-top: 50px;
-}
 
 .createProject-form {
-  min-width: 60%;
+  min-width: 80%;
 }
 
-textarea {
+.textareainputs {
   min-width: 100%;
-  border-radius: 5%;
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
-  background-color: rgba(0, 0, 0, 0.2);
-  color: rgb(54, 53, 53);
-  padding: 20px;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 0px;
+  background: #dedede;
+
+}
+
+.textinputs {
+  min-width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 0px;
+  background: #dedede !important;
+
 }
 
 .myProjectContainer {
@@ -470,12 +466,6 @@ textarea {
   /* margin-bottom: 20%; */
 }
 
-#payInfo {
-  margin-left: 30%;
-  margin-right: 30%;
-  margin-top: 10%;
-}
-
 #deleteUser-form {
   margin-left: 35%;
   margin-right: 35%;
@@ -483,9 +473,6 @@ textarea {
   /* margin-bottom: 20%; */
 }
 
-.navbar {
-  background-color: #cae1a6;
-}
 
 #reviewPhotos {
   display: flex;
@@ -497,4 +484,13 @@ textarea {
   width: 30%;
 }
 
+.text-green{
+  color:#79a00a;
+}
 
+.bg-green{
+  background: #79a00a;
+}
+.advert{
+  width:80vw ;
+}

@@ -1,126 +1,147 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light bg-gradient navbar-scroll myNav fixed" >
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/"><img src="/images/logo.png" alt="" width="150" height="50"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<div class="row bg-green py-2 text-light">
+  <div class="container  advert">
+          Contact us via: 0204225473 / 054 69 50035
+  </div>
+</div>
+<nav class="navbar navbar-expand-lg py-2 bg-light navbar-scroll" >
+    <div class="container">
+      <a class="navbar-brand" href="/"><img src="/images/logos/black.png" alt="" width="150"></a>
+
+
+      <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button>
+      </button> -->
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav ms-auto mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active text-green" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">about</a>
+            <a class="nav-link text-green" href="#">about</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">projects</a>
+            <a class="nav-link text-green" href="#">projects</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Blog</a>
+            <a class="nav-link text-green strong" href="#">Blog</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="modal" href="#login-modal" role="button"><ion-icon name="person-outline" ></ion-icon>login</a>
-          </li>
-        </ul>
-        <button type="button" class="btn btn-success btn-lg get-started" data-bs-toggle="modal" data-bs-target="#signup-modal">Get Started</button>
-        <!-- <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+         <!-- button modal starts here -->
+         <li class="nav-item">
+          <a class="nav-link text-green" data-bs-toggle="modal" href="#login-modal" role="button">
+            <ion-icon name="person-outline" w="50" ></ion-icon>Sign in</a>
+        </li>
+      </ul>
+
+       <!-- ================project owner start button here  -->
+      <button type="button" class="btn bg-green text-light" data-bs-toggle="modal" data-bs-target="#signup-modal">Create a Project</button>
+    </div>
+    </div>
+
+   <!-- ================== end of the button section for project owner  -->
+
+   <div class="modal fade" id="signup-modal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-transparent border-0">
+      <div class="app signup-modal">
+        <form class="frm signup-form" action="/login" method="post">
+       <div id="loginContain">
+        </div>
+        <p class="display-4 text-start text-green">Sign up</p>
+
+    
+    <script type="text/javascript">
+          $('#createAccBtn').click(function() {
+              $('#signup-modal').modal('hide');
+          });
+    </script>
+
+    
+            <div>
+                <button type="button" class="d-grid gap-3 col-12 mx-auto btn bg-green text-light strong p-2" id="createAccBtn" data-bs-toggle="modal" data-bs-target="#createAcc-modal" > Create an account</button>
+            </div>
+           <div class="text-center"><hr>or login via <hr></div>
+
+            <!-- ==================other logins section here====================== -->
+
+            <div class="d-grid gap-3 col-12 mx-auto">      
+                  <button class="btn btn-danger p-2" type="button" onclick="window.location.href='/login/auth/google'"><ion-icon name="logo-google"></ion-icon>Sign up with Google</button>
+
+                  <button class="btn btn-primary p-2" type="button" onclick="window.location.href='/login/auth/twitter'"><ion-icon name="logo-facebook"></ion-icon>Sign up with facebook</button>
+
+                  <button class="btn btn-secondary p-2" type="button" onclick="window.location.href='/login/github'"><ion-icon name="logo-github"></ion-icon>Sign up with GitHub</button>
+
+                  <button class="btn btn-light p-2" type="button" onclick="window.location.href='/login/email'"><ion-icon name="mail-outline"></ion-icon>Sign up with Email</button>
+              </div>
+
+              <hr>
+            <div>
+              <p class="pt-3 text-center">Already have an account? <a class="text-green text-decoration-none" href="#login" >Sign in</a> </p>
+            <p id="termsPolicies">By registering, the user agrees to comply with MNFundAfric's <a class="text-green text-decoration-none" href="#"> Terms of Use </a>  and  <a class="text-green text-decoration-none" href="#"> Privacy Policy.</a> </p>
+          </div>
+
+
+          <div id="logincontain">
+          <div><img class="" src="/images/logos/black.png" alt="" width="30%" ></div>
+        </div>
+
         </form>
-         -->
-      </div>
     </div>
+    </div>
+    </div>
+  </div>
+<!--  =====================sign up modal interface section here ============== -->
 
-    <div class="modal fade" id="signup-modal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-transparent border-0">
-        <div class="app signup-modal">
-          <form class="frm signup-form" action="/login" method="post">
-            <div class="d-grid gap-2 col-12 mx-auto">
-              <button class="btn btn-info" type="button" onclick="window.location.href='/login/auth/google'"><ion-icon name="logo-google"></ion-icon>Sign up with Google</button>
-              <button class="btn btn-primary" type="button" onclick="window.location.href='/login/auth/twitter'"><ion-icon name="logo-facebook"></ion-icon>Sign up with facebook</button>
-              <button class="btn btn-secondary" type="button" onclick="window.location.href='/login/github'"><ion-icon name="logo-github"></ion-icon>Sign up with GitHub</button>
-              <button class="btn btn-light" type="button" onclick="window.location.href='/login/email'"><ion-icon name="mail-outline"></ion-icon>Sign up with Email</button>
-          </div>
-      
-          <div id="loginContain">
-              <div><img src="/images/maximlogo2-removebg-preview.png" alt="" srcset="" width="200" height="50"></div>
-              <div>We will not post without your permission</div>
-              <div id="termsPolicies">By registering, the user agrees to comply with MNFundAfric's <a href=""> Terms of Use </a>  and  <a href=""> Privacy Policy.</a> </div>
-          </div>
-          <script type="text/javascript">
-            $('#createAccBtn').click(function() {
-                $('#signup-modal').modal('hide');
-            });
-        </script>
-              <div>
-                  <input type="button" class="btn btn-dark" id="createAccBtn" data-bs-toggle="modal" data-bs-target="#createAcc-modal" value="Create an Account">
-              </div>
-              
-          </form>
-      </div>
-      </div>
-      </div>
-    </div>
+<div class="modal fade" id="createAcc-modal"  tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-transparent  ">
+    <div class="app signup-modal">
+      <form class="frm signup-form" action="/login/signup" method="post">
+        <div><img src="/images/logos/black.png" alt="" width="60%" ></div>
+        <div class="form-group">
+          <label for="name">Full Name: </label>
+          <input type="text" name="name" id="name" placeholder="Enter your name"  required>
+        </div>
+        <div class="form-group">
+          <label for="">Email: </label>
+          <input  type="email"  name="email" id="email" placeholder="Enter your email"  required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number: </label>
+          <input class="inputFields"  type="tel"   name="phone" id="phone" placeholder=""   required>
+        </div>
 
-    <div class="modal fade" id="createAcc-modal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-transparent border-0">
-        <div class="app signup-modal">
-          <form class="frm signup-form" action="/login/signup" method="post">
-            <div><img src="/images/MNFUNDAFRIC-logos_transparent.png" alt="" width="400" height="150"></div>
-            <div class="form-group">
-              <label for="">Full Name: </label>
-              <input 
-                  type="text" 
-                  name="name"
-                  id="name"
-                  placeholder="Enter your name" 
-                  required>
-            </div>
-            <div class="form-group">
-              <label for="">Email: </label>
-              <input 
-                  type="email" 
-                  name="email"
-                  id="email"
-                  placeholder="Enter your email" 
-                  required>
-            </div>
-            <div class="form-group">
-              <label for="">Phone Number: </label>
-              <input 
-                  type="tel" 
-                  name="phone"
-                  id="phone"
-                  placeholder="" 
-                  required>
-            </div>
-            <div><input type="hidden" id="phoneCode" name="phoneCode"></div>
-            <div class="form-group">
-              <label for="">Password: </label>
-              <input 
-                  type="password" 
-                  name="password"
-                  id="password"
-                  placeholder="Enter your password" 
-                  required>
-            </div>
-              <div>
-                  <input type="submit" value="Save">
-              </div>
-          </form>
-      </div>
-      </div>
-      </div>
-    </div>
+        <div><input type="hidden" id="phoneCode" name="phoneCode"></div>
+
+        <div class="form-group my-3">
+          <label for="password">Password: </label>
+          <input   type="password"  name="password" id="password"  placeholder="Enter your password"  required>
+        </div>
+          <div>
+              <input class="btn" type="submit" value="Save">
+          </div>
+      </form>
+  </div>
+  </div>
+  </div>
+</div>
+
+<!-- ================ modal for sign up ends here ================ -->
+
 
     <div class="modal fade" id="login-modal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-transparent border-0">
         <div class="app">
-          <form class="frm" action="/login" method="post">
-              <div>
-                <div class="form-group"><img src="/images/maximlogo2-removebg-preview.png" alt="" srcset="" style="width: 100; height: 50;"></div>
+          <form class="frm bg-light" action="/login" method="post">
+             <!-- the logo is here  -->
+             <div>
+              <div class="form-group"><img class="text-center" src="/images/logos/black.png" alt="" width="60%">
+              <p class="display-4 text-green">Sign in </p>
+              </div>
+
+              <!-- and ends here  -->
+
                 <% if (message.length > 0) { %>
                   <script type="text/javascript">
                     $(window).load(function(){
@@ -131,7 +152,7 @@
               <% } %>
                   <!-- <h1>Login</h1> -->
               </div>
-              <div class="form-group">
+              <div class="form-group my-3">
                   <!-- <label for="">Email: </label> -->
                   <input 
                       type="email" 
@@ -140,7 +161,7 @@
                       placeholder="Email" 
                       required>
               </div>
-              <div class="form-group">
+              <div class="form-group my-3">
                   <!-- <label for="">Password:</label> -->
                   <input 
                       type="password"
@@ -152,6 +173,8 @@
               <div>
                   <input type="submit" value="Login ">
               </div>
+              <p class="h6 my-4 text-center">Don't have an account? <a class="text-green text-decoration-none" href="#signup"> Sign up </a> </p>
+
           </form>
       </div>
       </div>

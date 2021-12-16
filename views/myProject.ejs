@@ -116,9 +116,10 @@
 
 
     <!-- Modal -->
-<div class="modal fade" id="updateSocial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="updateSocial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-transparent border-0">
+      <div class="modal-content bg-light border-0">
+        <div class="modal-body">
             <form class="frm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=social" method="post">
                 <div class="mb-3">
                   <label for="youtube" class="form-label"><ion-icon name="logo-youtube"></ion-icon> youTube</label>
@@ -143,14 +144,16 @@
                 
                 <button type="submit" class="btn btn-primary">Update</button>
               </form>
+            </div>
         </div>
     </div>
   </div>
 
   <!-- Modal -->
-<div class="modal fade" id="updateAddress" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="updateAddress" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-transparent border-0">
+      <div class="modal-content bg-light border-0">
+        <div class="modal-body">
             <form class="frm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=address" method="post">
                 <div class="mb-3">
                   <label for="country" class="form-label">Country</label>
@@ -174,14 +177,16 @@
                   </div>                
                 <button type="submit" class="btn btn-primary">Update</button>
               </form>
+              </div>
         </div>
     </div>
   </div>
 
   <!-- Modal -->
-<div class="modal fade" id="updateDates" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="updateDates" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-transparent border-0">
+      <div class="modal-content bg-light border-0">
+        <div class="modal-body">
             <form class="frm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=projectDates" method="post">
                 <div class="mb-3">
                   <label for="startDate" class="form-label">Campaign start date</label>
@@ -195,14 +200,16 @@
                   </div>           
                 <button type="submit" class="btn btn-primary">Update</button>
               </form>
+              </div>
         </div>
     </div>
   </div>
 
   <!-- Modal -->
-<div class="modal fade" id="updateTitle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="updateTitle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-transparent border-0">
+      <div class="modal-content bg-light border-0">
+        <div class="modal-body">
             <form class="frm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=projectTitle" method="post">
                 <div class="mb-3">
                   <label for="title" class="form-label">Project Title</label>
@@ -216,14 +223,16 @@
                   </div>           
                 <button type="submit" class="btn btn-primary">Update</button>
               </form>
+              </div>
         </div>
     </div>
   </div>
 
   <!-- Modal -->
-<div class="modal fade" id="updateTarget" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="updateTarget" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-transparent border-0">
+      <div class="modal-content bg-light border-0">
+        <div class="modal-body">
             <form class="frm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=funding" method="post">
                 <div class="mb-3">
                   <label for="amount" class="form-label">Target amount</label>
@@ -242,14 +251,16 @@
                   </div>           
                 <button type="submit" class="btn btn-primary">Update</button>
               </form>
+              </div>
         </div>
     </div>
   </div>
 
   <!-- Modal -->
-<div class="modal fade" id="updateDescription" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="updateDescription" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-transparent border-0">
+      <div class="modal-content bg-light border-0">
+        <div class="modal-body">
             <form class="frm updateForm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=description" method="post">
                 <div class="mb-3">
                   <label for="description" class="form-label">Project Description</label>
@@ -265,14 +276,16 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
               </form>
+              </div>
         </div>
     </div>
   </div>
 
    <!-- Modal -->
-<div class="modal fade" id="updateAimedResult" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="updateAimedResult" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-transparent border-0">
+      <div class="modal-content bg-light border-0">
+        <div class="modal-body">
             <form class="frm updateForm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=aim" method="post">
                 <div class="mb-3">
                   <label for="aimedResult" class="form-label">Aimed end result of the project</label>
@@ -288,14 +301,16 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
               </form>
+              </div>
         </div>
     </div>
   </div>
 
    <!-- Modal -->
-<div class="modal fade" id="updateImpact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-transparent border-0">
+<div class="modal" id="updateImpact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+      <div class="modal-content bg-light border-0">
+        <div class="modal-body">
             <form class="frm updateForm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=impact" method="post">
                 <div class="mb-3">
                   <label for="impact" class="form-label">Description of the impact on the digital transformation of Africa</label>
@@ -311,6 +326,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Update</button>
               </form>
+              </div>
         </div>
     </div>
   </div>

@@ -1,16 +1,21 @@
 <%include header%>
 <body>
     <div class="app">
-        <form class="frm" action="/login/admin" method="post">
-            <div class="form-group">
-                <div class="form-group"><img src="/images/maximlogo2-removebg-preview.png" alt="" srcset="" style="width: 100; height: 50;"></div>
+        <form class="frm bg-light" action="/login/admin" method="post">
+             <!-- the logo is here  -->
+            <div>
+             <div class="form-group"><img class="text-center" src="/images/logos/black.png" alt="" width="60%">
+             <p class="display-4 text-green">Sign in </p>
+             </div>
+
+             <!-- and ends here  -->
                 <% if (message.length > 0) { %>
                     <div class="alert alert-danger"><%= message %></div>
                 <% } %>
                 
             </div>
 
-            <div class="form-group">
+            <div class="form-group my-3">
                 <!-- <label for="">Username: </label> -->
                 <input 
                     type="text" 
@@ -19,7 +24,7 @@
                     placeholder="Email" 
                     required>
             </div>
-            <div class="form-group">
+            <div class="form-group my-3">
                 <!-- <label for="">Password:</label> -->
                 <input 
                     type="password"
@@ -32,5 +37,6 @@
                 <input type="submit" value="Login ">
             </div>
         </form>
+       
     </div>
 </body>
