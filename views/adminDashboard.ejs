@@ -1,60 +1,36 @@
 <%include header%> 
-<body>
+<body style="background-image: #cab5b3;">
     <%include adminNav%>
       <main class="mt-5 pt-12">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
-              <h4>Dashboard</h4>
+              <h4><ion-icon name="desktop"></ion-icon> Dashboard</h4>
             </div>
           </div>
           <div class="row">
             <div class="col-md-3 mb-3">
-              <div class="admin-card bg-primary text-white h-100">
+              <div class="admin admin-card text-dark h-100">
                 <b>Admins</b> 
                 <div class="card-body py-5"><%=userCount[0]['COUNT(*)']%></div>
-                <!-- <div class="card-footer d-flex">
-                  Admins
-                  <span class="ms-auto">
-                    <i class="bi bi-chevron-right"></i>
-                  </span>
-                </div> -->
               </div>
             </div>
             <div class="col-md-3 mb-3">
-              <div class="admin-card bg-warning text-dark h-100">
+              <div class="po admin-card text-dark h-100">
                 <b>Project Owners</b>
                 <div class="card-body py-5"><%=poCount[0]['COUNT(*)']%></div>
-                <!-- <div class="card-footer d-flex">
-                  Users
-                  <span class="ms-auto">
-                    <i class="bi bi-chevron-right"></i>
-                  </span>
-                </div> -->
               </div>
             </div>
             <div class="col-md-3 mb-3">
-              <div class="admin-card bg-success text-white h-100">
+              <div class="np admin-card text-dark h-100">
                 <b>New Projects</b>
                 <div class="card-body py-5"><%=newProject[0]['COUNT(*)']%></div>
-                <!-- <div class="card-footer d-flex">
-                  New Projects
-                  <span class="ms-auto">
-                    <i class="bi bi-chevron-right"></i>
-                  </span>
-                </div> -->
               </div>
             </div>
             <div class="col-md-3 mb-3">
-              <div class="admin-card bg-danger text-white h-100">
+              <div class="rp admin-card text-dark h-100">
                 <b>Reviewed Projects</b>
                 <div class="card-body py-5"><%=reviewedProject[0]['COUNT(*)']%></div>
-                <!-- <div class="card-footer d-flex">
-                  Approved Projects
-                  <span class="ms-auto">
-                    <i class="bi bi-chevron-right"></i>
-                  </span>
-                </div> -->
               </div>
             </div>
           </div>

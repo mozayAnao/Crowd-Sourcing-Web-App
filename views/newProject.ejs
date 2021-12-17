@@ -5,7 +5,7 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
-              <h4>New Project</h4>
+              <h4><ion-icon name="documents"></ion-icon> New Project</h4>
             </div>
           </div>
                   
@@ -16,12 +16,12 @@
                         <div id="prj1" type="button" data-bs-toggle="modal" data-bs-target="#updatetitle" title="Click to Edit"><h2><%=projectDetails[0].title%></h2></div>
                         <div id="prj1" type="button" data-bs-toggle="modal" data-bs-target="#updatetitle" title="Click to Edit"><p>by <%=projectDetails[0].organizationName%></p></div>
                         <br>
-                        <div id="prj1" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photos[0].path%>" alt="" width="100%" height="400px"></div>
+                        
                         <div id="prj1"><h4>Description of the project</h4></div>
                         <div id="prj1" type="button" data-bs-toggle="modal" data-bs-target="#updateDescription" title="Click to Edit"><p><%=projectDetails[0].description%></p></div>
                         <br>
                         <br>
-                        <div id="prj1" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photos[1].path%>" alt="" width="100%" height="400px"></div>
+                       
                         <br>
                         <div id="prj1"><h4>Aimed end result of the project</h4></div>
                         <div id="prj1" type="button" data-bs-toggle="modal" data-bs-target="#updateAimedResult" title="Click to Edit"><p><%=projectDetails[0].aimedResult%></p></div>
@@ -30,7 +30,15 @@
                         <div id="prj1"><h4>Description of the impact on the digital transformation of Africa </h4></div>
                         <div id="prj1" type="button" data-bs-toggle="modal" data-bs-target="#updateImpact" title="Click to Edit"><p><%=projectDetails[0].descriptionOfImpact%></p></div>
                         <br>
-                        <div id="prj1" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photos[2].path%>" alt="" width="100%" height="400px"></div>
+                        
+                        <div>
+                          <div><h4>Photos</h4></div>
+                          <div id="reviewPhotos">
+                              <div id="reviewPhoto" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photos[0].path%>" alt="" width="100%" height="100px"></div>
+                              <div id="reviewPhoto" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photos[1].path%>" alt="" width="100%" height="100px"></div>
+                              <div id="reviewPhoto" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photos[2].path%>" alt="" width="100%" height="100px"></div>
+                          </div>
+                      </div>
                     </div>
                     <div class="prj2">
                         <!-- <%if(projectFunding[0].amountRecieved == null) projectFunding[0].amountRecieved = 0;%> -->
@@ -136,7 +144,8 @@
                    <!-- Modal -->
             <div class="modal fade" id="assignReviewer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content bg-transparent border-0">
+                  <div class="modal-content bg-light border-0">
+                    <div class="modal-body">
                         <form class="frm" action="/admin/assignReviewer" method="post">
                             <div class="mb-3">
                               <!-- <label for="country" class="form-label">Country</label> -->
@@ -151,15 +160,16 @@
                                     
                             <button type="submit" class="btn btn-primary">Assign</button>
                           </form>
+                        </div>
                     </div>
                 </div>
               </div>
 
                 <!-- Modal -->
-            <div class="modal fade" id="updateSocial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal" id="updateSocial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content bg-transparent border-0">
-                        <form class="frm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=social" method="post">
+                  <div class="modal-content bg-light border-0">
+                        <form class="frm" action="/admin/editProject?projectId=<%=projectDetails[0].id%>&model=social" method="post">
                             <div class="mb-3">
                               <label for="youtube" class="form-label"><ion-icon name="logo-youtube"></ion-icon> youTube</label>
                               <input type="text" class="form-control" id="youtube" name="youtube" value="<%=socialMedia[0].link%>">
@@ -188,10 +198,10 @@
               </div>
             
               <!-- Modal -->
-            <div class="modal fade" id="updateAddress" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal" id="updateAddress" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content bg-transparent border-0">
-                        <form class="frm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=address" method="post">
+                  <div class="modal-content bg-light border-0">
+                        <form class="frm" action="/admin/editProject?projectId=<%=projectDetails[0].id%>&model=address" method="post">
                             <div class="mb-3">
                               <label for="country" class="form-label">Country</label>
                               <select class="inputFields" name="country" id="country">
@@ -219,10 +229,10 @@
               </div>
             
               <!-- Modal -->
-            <div class="modal fade" id="updateDates" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal" id="updateDates" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content bg-transparent border-0">
-                        <form class="frm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=projectDates" method="post">
+                  <div class="modal-content bg-light border-0">
+                        <form class="frm" action="/admin/editProject?projectId=<%=projectDetails[0].id%>&model=projectDates" method="post">
                             <div class="mb-3">
                               <label for="startDate" class="form-label">Campaign start date</label>
                               <input type="date" class="form-control" id="startDate" name="startDate" value="<%=projectDetails[0].fundCampaignStartDate%>">
@@ -240,10 +250,10 @@
               </div>
             
               <!-- Modal -->
-            <div class="modal fade" id="updateTitle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal" id="updateTitle" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content bg-transparent border-0">
-                        <form class="frm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=projectTitle" method="post">
+                  <div class="modal-content bg-light border-0">
+                        <form class="frm" action="/admin/editProject?projectId=<%=projectDetails[0].id%>&model=projectTitle" method="post">
                             <div class="mb-3">
                               <label for="title" class="form-label">Project Title</label>
                               <input type="text" class="form-control" id="title" name="title" value="<%=projectDetails[0].title%>">
@@ -261,10 +271,10 @@
               </div>
             
               <!-- Modal -->
-            <div class="modal fade" id="updateTarget" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal" id="updateTarget" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content bg-transparent border-0">
-                        <form class="frm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=funding" method="post">
+                  <div class="modal-content bg-light border-0">
+                        <form class="frm" action="/admin/editProject?projectId=<%=projectDetails[0].id%>&model=funding" method="post">
                             <div class="mb-3">
                               <label for="amount" class="form-label">Target amount</label>
                               <input type="text" class="form-control" id="amount" name="amount" value="<%=projectFunding[0].amountRequired%>">
@@ -287,10 +297,10 @@
               </div>
             
               <!-- Modal -->
-            <div class="modal fade" id="updateDescription" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal" id="updateDescription" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content bg-transparent border-0">
-                        <form class="frm updateForm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=description" method="post">
+                  <div class="modal-content bg-light border-0">
+                        <form class="frm updateForm" action="/admin/editProject?projectId=<%=projectDetails[0].id%>&model=description" method="post">
                             <div class="mb-3">
                               <label for="description" class="form-label">Project Description</label>
                               <textarea 
@@ -310,10 +320,10 @@
               </div>
             
                <!-- Modal -->
-            <div class="modal fade" id="updateAimedResult" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal" id="updateAimedResult" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content bg-transparent border-0">
-                        <form class="frm updateForm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=aim" method="post">
+                  <div class="modal-content bg-light border-0">
+                        <form class="frm updateForm" action="/admin/editProject?projectId=<%=projectDetails[0].id%>&model=aim" method="post">
                             <div class="mb-3">
                               <label for="aimedResult" class="form-label">Aimed end result of the project</label>
                               <textarea 
@@ -333,10 +343,10 @@
               </div>
             
                <!-- Modal -->
-            <div class="modal fade" id="updateImpact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal" id="updateImpact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content bg-transparent border-0">
-                        <form class="frm updateForm" action="/projectOwner/editProject?projectId=<%=projectDetails[0].id%>&model=impact" method="post">
+                  <div class="modal-content bg-light border-0">
+                        <form class="frm updateForm" action="/admin/editProject?projectId=<%=projectDetails[0].id%>&model=impact" method="post">
                             <div class="mb-3">
                               <label for="impact" class="form-label">Description of the impact on the digital transformation of Africa</label>
                               <textarea 

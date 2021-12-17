@@ -8,9 +8,7 @@ const { v4: uuidv4 } = require('uuid');
 const auth = require('../modules/authenticate');
 
 router.get('/', auth.isLoggedIn, function(req, res, next) {
-    res.render('projectOwner', { 
-        user : req.user 
-      })
+    res.redirect('/projectOwner/myProjects')
 });
 
 router.get('/myProjects', auth.isLoggedIn, function(req, res, next) {

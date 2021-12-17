@@ -11,7 +11,7 @@ module.exports = function mailer(receipient, subject, html) {
       });
       
       var mailOptions = {
-        from: 'mosesanao13@gmail.com',
+        from: 'MaximNyansaFundAfric',
         to: receipient,
         subject: subject,
         html: html

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const passport = require('passport');
+const validate = require('../modules/validate');
 
 router.get('/', function(req, res, next) {
   res.render('login');

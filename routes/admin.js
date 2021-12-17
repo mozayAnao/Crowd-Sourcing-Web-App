@@ -209,6 +209,82 @@ router.get('/newProject', auth.isLoggedIn, function(req, res, next) {
   }); 
 });
 
+router.post('/editProject', auth.isLoggedIn, function(req, res, next) {
+  if(req.query.model == 'description') {
+    var sql = `UPDATE project_details SET description = "${req.body.description}" WHERE id = '${req.query.projectId}'`
+    con.query(sql, function(err, rows) {
+      if(err) console.log(err);
+      console.log(rows.affectedRows + " record(s) updated");
+      res.redirect(`/admin/newProject?id=${req.query.projectId}`)
+    })
+  }else if(req.query.model == 'aim') {
+    var sql = `UPDATE project_details SET aimedResult = "${req.body.aimedResult}" WHERE id = '${req.query.projectId}'`
+    con.query(sql, function(err, rows) {
+      if(err) console.log(err);
+      console.log(rows.affectedRows + " record(s) updated");
+      res.redirect(`/admin/newProject?id=${req.query.projectId}`)
+    })
+  }else if(req.query.model == 'impact') {
+    var sql = `UPDATE project_details SET descriptionOfImpact = "${req.body.impact}" WHERE id = '${req.query.projectId}'`
+    con.query(sql, function(err, rows) {
+      if(err) console.log(err);
+      console.log(rows.affectedRows + " record(s) updated");
+      res.redirect(`/admin/newProject?id=${req.query.projectId}`)
+    })
+  }else if(req.query.model == 'projectTitle') {
+    var sql = `UPDATE project_details SET title = "${req.body.title}", organizationName = "${req.body.org}" WHERE id = '${req.query.projectId}'`
+    con.query(sql, function(err, rows) {
+      if(err) console.log(err);
+      console.log(rows.affectedRows + " record(s) updated");
+      res.redirect(`/admin/newProject?id=${req.query.projectId}`)
+    })
+  }else if(req.query.model == 'projectDates') {
+    var sql = `UPDATE project_details SET fundCampaignStartDate = "${req.body.startDate}", fundCampaignEndDate = "${req.body.endDate}" WHERE id = '${req.query.projectId}'`
+    con.query(sql, function(err, rows) {
+      if(err) console.log(err);
+      console.log(rows.affectedRows + " record(s) updated");
+      res.redirect(`/admin/newProject?id=${req.query.projectId}`)
+    })
+  }else if(req.query.model == 'funding') {
+    var sql = `UPDATE project_funding SET amountRequired = "${req.body.amount}", currencyId = "${req.body.currency}" WHERE projectId = '${req.query.projectId}'`
+    con.query(sql, function(err, rows) {
+      if(err) console.log(err);
+      console.log(rows.affectedRows + " record(s) updated");
+      res.redirect(`/admin/newProject?id=${req.query.projectId}`)
+    })
+  }else if(req.query.model == 'address') {
+    var sql = `UPDATE addresses SET country = "${req.body.country}", region = "${req.body.region}", gpsCordinates = "${req.body.gps}" WHERE id = '${req.query.projectId}'`
+    con.query(sql, function(err, rows) {
+      if(err) console.log(err);
+      console.log(rows.affectedRows + " record(s) updated");
+      res.redirect(`/admin/newProject?id=${req.query.projectId}`)
+    })
+  }else {
+    var sql = `UPDATE social_media_links SET link = "${req.body.youtube}" WHERE projectId = '${req.query.projectId}' AND app = 'youTube'`
+    var sql2 = `UPDATE social_media_links SET link = "${req.body.facebook}" WHERE projectId = '${req.query.projectId}' AND app = 'facebook'`
+    var sql3 = `UPDATE social_media_links SET link = "${req.body.twitter}" WHERE projectId = '${req.query.projectId}' AND app = 'twitter'`
+    var sql4 = `UPDATE social_media_links SET link = "${req.body.instagram}" WHERE projectId = '${req.query.projectId}' AND app = 'instagram'`
+    con.query(sql, function(err, rows) {
+      if(err) console.log(err);
+      console.log(rows.affectedRows + " record(s) updated");
+      con.query(sql2, function(err, rows) {
+        if(err) console.log(err);
+        console.log(rows.affectedRows + " record(s) updated");
+        con.query(sql3, function(err, rows) {
+          if(err) console.log(err);
+          console.log(rows.affectedRows + " record(s) updated");
+          con.query(sql4, function(err, rows) {
+            if(err) console.log(err);
+            console.log(rows.affectedRows + " record(s) updated");
+            res.redirect(`/admin/newProject?id=${req.query.projectId}`)
+          })
+        })
+      })
+      
+    })
+  }
+});
+
 router.post('/assignReviewer', auth.isLoggedIn, function(req, res, next) {
   console.log(req.body)
   const sql = `INSERT INTO project_review (projectId, reviewerId) VALUES (?,?)`;

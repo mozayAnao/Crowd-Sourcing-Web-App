@@ -14,7 +14,7 @@ body {
 
 :root {
   --offcanvas-width: 270px;
-  --topNavbarHeight: 80px;
+  --topNavbarHeight: 67px;
   --whiteColor:#f2f2f2;
 }
 .sidebar-nav {
@@ -23,6 +23,8 @@ body {
 .sidebar-link {
   display: flex;
   align-items: center;
+  font: bold;
+  font-size: 14px;
 }
 .sidebar-link .right-icon {
   display: inline-flex;
@@ -52,6 +54,22 @@ body {
     height: calc(100% - var(--topNavbarHeight));
     top: var(--topNavbarHeight);
   }
+}
+
+.admin {
+  background-color: #EA6A47;
+}
+
+.po {
+  background-color: #7E909A;
+}
+
+.np {
+  background-color: #B3C100;
+}
+
+.rp {
+  background-color: #4CB5F5;
 }
 
 a {
@@ -208,11 +226,15 @@ footer {
 .frm {
   display: block;
   width: 100%;
-  max-width: 400px;
+  /* max-width: 400px; */
   padding: 50px 30px;
   background-image: rgb(240, 240, 240);
   /* box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); */
   border-radius: 5px;
+}
+
+.admin-form {
+  max-width: 400px;
 }
 
 .signup-form {
@@ -390,11 +412,11 @@ section:hover {
   min-width: 80%;
 }
 
-.textareainputs {
+.textareainputs, textarea {
   min-width: 100%;
   border: none;
   border-radius: 10px;
-  padding: 5px 0px;
+  padding: 15px;
   background: #dedede;
 
 }
@@ -403,7 +425,7 @@ section:hover {
   min-width: 100%;
   border: none;
   border-radius: 10px;
-  padding: 5px 0px;
+  padding: 10px;
   background: #dedede !important;
 
 }
