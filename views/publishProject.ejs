@@ -4,7 +4,7 @@
       <main class="mt-5 pt-12">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 text-green">
               <h4>Publish Project</h4>
             </div>
           </div>
@@ -127,7 +127,7 @@
                           <p>Are you sure you want to publish this project?</p>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" onclick="window.location.href='/admin/publish?projectId=<%=projectDetails[0].id%>&po=<%=projectOwner[0].name%>&email=<%=projectOwner[0].email%>&title=<%=projectDetails[0].title%'">Confirm</button>
+                            <button type="button" class="btn btn-primary" onclick="window.location.href='/admin/publish?projectId=<%=projectDetails[0].id%>&po=<%=projectOwner[0].name%>&email=<%=projectOwner[0].email%>&title=<%=projectDetails[0].title%>'">Confirm</button>
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                           
                         </div>

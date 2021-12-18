@@ -400,8 +400,8 @@ section:hover {
 } */
 
 .create-project {
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 20%;
+  margin-right: 20%;
   margin-top: 80px;
   display: flex;
   justify-content: center;
@@ -459,7 +459,7 @@ section:hover {
   flex-direction: column;
   /* align-content: center; */
   /* justify-content: center; */
-  padding-top: 100px;
+  padding-top: 40px;
   text-align: center;
 }
 
@@ -515,4 +515,34 @@ section:hover {
 }
 .advert{
   width:80vw ;
+}
+
+.bg-white{
+  background: #dedede !important;
+
+}
+
+.rounded-corners{
+  border-radius: 20px;
+}
+.top-rounded-corners{
+  border-top-right-radius: 20px;
+}
+
+.table-green{
+  background: #e5ffe9;
+}
+
+.normal-fs{
+   font-size: 12px;
+}
+
+.table-grey{
+  background: rgb(219, 219, 219);
+}
+
+#payInfo {
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 10%;
 }

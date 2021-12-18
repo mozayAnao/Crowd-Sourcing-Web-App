@@ -50,30 +50,30 @@
     Button with data-bs-target
   </button> -->
   
-  <div class="offcanvas offcanvas-start sidebar-nav tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas top-rounded-corners offcanvas-start sidebar-nav bg-dark tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
       <!-- <h5 class="offcanvas-title" id="offcanvasExampleLabel">Offcanvas</h5> -->
       <!-- <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button> -->
     </div>
-    <div class="offcanvas-body p-0">
-      <nav class="navbar-success navbar-light">
+    <div class="offcanvas-body">
+      <nav class="navbar-dark">
         <ul class="navbar-nav">
           <li>
             <a href="/admin/dashboard?id=<%=user.id%>" class="nav-link px-3 active">
-              <span class="me-3"><i class="bi bi-speedometer2"></i></span>
-              <span>Dashboard</span>
+              <span class="me-3 text-green"><i class="bi bi-speedometer2"></i></span>
+              <span class="fs-4 text-green">Dashboard</span>
             </a>
           </li>
-          <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
+          <li class="my-4"><hr class="dropdown-divider bg-green" /></li>
           <li>
             <a
               class="nav-link px-3 sidebar-link active"
               data-bs-toggle="collapse"
               href="#users"
             >
-              <span class="me-3"><ion-icon name="person"></ion-icon>
+              <span class="me-3 text-green"><ion-icon name="person"></ion-icon>
               </span>
-              <span>Users</span>
+              <span class="fs-4 text-green">Users</span>
               <span class="ms-auto">
                 <span class="right-icon">
                   <i class="bi bi-chevron-down"></i>
@@ -84,32 +84,32 @@
               <ul class="navbar-nav ps-3">
                 <li>
                   <a href="/admin/addUser" class="nav-link px-3 active">
-                    <span class="me-2"
+                    <span class="me-2 text-green"
                       ><i class="bi bi-speedometer2"></i
                     ></span>
-                    <span>Add User</span>
+                    <span class="text-green">Add User</span>
                   </a>
                 </li>
                 <li>
                   <a href="/admin/manageUsers" class="nav-link px-3 active">
-                    <span class="me-2"
+                    <span class="me-2 text-green"
                       ><i class="bi bi-speedometer2"></i
                     ></span>
-                    <span>Manage Users</span>
+                    <span class="text-green">Manage Users</span>
                   </a>
                 </li>
               </ul>
             </div>
           </li>
-          <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
+          <li class="my-4"><hr class="dropdown-divider bg-green" /></li>
           <li>
             <a
               class="nav-link px-3 sidebar-link active"
               data-bs-toggle="collapse"
               href="#projects"
             >
-              <span class="me-3"><i class="bi bi-layout-split"></i></span>
-              <span>Projects</span>
+              <span class="me-3 text-green"><i class="bi bi-layout-split"></i></span>
+              <span class="fs-4 text-green">Projects</span>
               <span class="ms-auto">
                 <span class="right-icon">
                   <i class="bi bi-chevron-down"></i>
@@ -123,7 +123,7 @@
                     <span class="me-2"
                       ><i class="bi bi-speedometer2"></i
                     ></span>
-                    <span>New</span>
+                    <span class="text-green">New</span>
                   </a>
                 </li>
                 <li>
@@ -131,7 +131,7 @@
                     <span class="me-2"
                       ><i class="bi bi-speedometer2"></i
                     ></span>
-                    <span>Reviewed</span>
+                    <span class="text-green">Reviewed</span>
                   </a>
                 </li>
                 <li>
@@ -139,13 +139,13 @@
                     <span class="me-2"
                       ><i class="bi bi-speedometer2"></i
                     ></span>
-                    <span>Funding</span>
+                    <span class="text-green">Funding</span>
                   </a>
                 </li>
               </ul>
             </div>
           </li>
-          <li class="my-4"><hr class="dropdown-divider bg-light" /></li>
+          <li class="my-4"><hr class="dropdown-divider bg-green" /></li>
         </ul>
       </nav>
     </div>

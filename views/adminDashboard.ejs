@@ -4,41 +4,44 @@
       <main class="mt-5 pt-12">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 text-green">
               <h4><ion-icon name="desktop"></ion-icon> Dashboard</h4>
             </div>
           </div>
+          <br>
+          <br>
           <div class="row">
             <div class="col-md-3 mb-3">
-              <div class="admin admin-card text-dark h-100">
+              <div class="admin admin-card text-dark rounded-corners">
                 <b>Admins</b> 
                 <div class="card-body py-5"><%=userCount[0]['COUNT(*)']%></div>
               </div>
             </div>
             <div class="col-md-3 mb-3">
-              <div class="po admin-card text-dark h-100">
+              <div class="po admin-card text-dark rounded-corners">
                 <b>Project Owners</b>
                 <div class="card-body py-5"><%=poCount[0]['COUNT(*)']%></div>
               </div>
             </div>
             <div class="col-md-3 mb-3">
-              <div class="np admin-card text-dark h-100">
+              <div class="np admin-card text-dark rounded-corners">
                 <b>New Projects</b>
                 <div class="card-body py-5"><%=newProject[0]['COUNT(*)']%></div>
               </div>
             </div>
             <div class="col-md-3 mb-3">
-              <div class="rp admin-card text-dark h-100">
+              <div class="rp admin-card text-dark rounded-corners">
                 <b>Reviewed Projects</b>
                 <div class="card-body py-5"><%=reviewedProject[0]['COUNT(*)']%></div>
               </div>
             </div>
           </div>
-         
+         <br>
+         <br>
           <div class="row">
             <div class="col-md-12 mb-3">
               <div class="card">
-                <div class="card-header">
+                <div class="card-header bg-dark text-light">
                   <span><i class="bi bi-table me-2"></i></span> Published Projects
                 </div>
                 <div class="card-body">
