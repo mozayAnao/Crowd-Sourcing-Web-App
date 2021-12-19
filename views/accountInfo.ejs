@@ -1,26 +1,33 @@
 <%include header%>  
  
 <body>
-    <%-include('navbarAuthenticated', {username: username, profilePhoto: profilePhoto})-%> 
+    <%-include('navbarAuthenticated', {user: user})-%> 
     <div class="accountDetails">
         <div id="acc-contain">
             <div class="info"><h2>Account Settings</h2></div>
             <div class="info">
                 <figure>
-                    <img src="<%=profilePhoto%>" alt="<%=profilePhoto%>" style="border-radius: 50%; width: 80; height: 80;">
+                    <img src="<%=user.photo%>" alt="" style="border-radius: 50%; width: 80; height: 80;">
                 </figure>
             </div>
             <div class="info">
-                <form class="accInfoForm" action="/accounts/newuser?apiUserId=<%=apiUserId%>" method="post">
-                    <div><label for="userName">Name</label></div>
-                    <div><input type="text" class="inputFields" name="userName" id="userName" value="<%=username%>"></div>
-                    <div><label for="email">email</label></div>
-                    <div><input type="email" class="inputFields" name="email" id="email"></div>
-                    <div><label for="phone">Phone Number</label></div>
-                    <div><input id="phone" type="tel" class="inputFields" name="phone" id="phone"/></div>
-                    <div><input type="hidden" id="phoneCode" name="phoneCode"></div>
-                    <div><input type="submit" class="inputFields inputButton" value="Save"></div>
-                    <div><input type="submit" class="inputFields inputButton" value="Cancel"></div>
+                <form class="accInfoForm" action="/accounts/newuser?apiUserId=<%=user.apiUserId%>" method="post">
+                    <div class="form-group">
+                        <label for="userName">Name</label>
+                        <input type="text" class="inputFields" name="userName" id="userName" value="<%=user.username%>">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">email</label>
+                        <input type="email" class="inputFields" name="email" id="email" placeholder="example@gmail.com">
+                    </div>
+                    <div class="form-group">
+                        <div><label for="phone">Phone Number</label></div>
+                        <input id="phone" type="tel" class="inputFields form-control" name="phone" id="phone"/>
+                        <input type="hidden" id="phoneCode" name="phoneCode">
+                    </div>
+                    
+                    <div><input type="submit" class="btn btn-success inputFields" value="Save"></div>
+                    <div><input type="submit" class="btn btn-danger inputFields" value="Cancel"></div>
                 </form>
             </div>
         </div>     

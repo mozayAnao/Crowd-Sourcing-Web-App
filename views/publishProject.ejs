@@ -16,9 +16,9 @@
                         <div id="prj1"><h2>Reviewer's Remarks</h2></div>
                         <div id="prj1"><%=review[0].remark%></div>
                         <%if(review[0].decision === '8') {%>
-                                <button class="btn bg-success">Approved</button>
+                                <button class="btn bg-success text-light">Approved</button>
                                     <%}else {%>
-                                        <button class="btn bg-danger">Rejected</button>
+                                        <button class="btn bg-danger text-light">Rejected</button>
                                         <%}%> 
                         <br>
                         <br>
@@ -106,12 +106,12 @@
                         <div><b>Phone Number: </b><%=projectOwner[0].phoneNumber%></div>
                         <br>
                         <br>
-                        <button class="btn bg-success" data-bs-toggle="modal" data-bs-target="#publish">Publish</button>
+                        <button class="btn bg-success text-light" data-bs-toggle="modal" data-bs-target="#publish">Publish</button>
                             
                         
                         <br>
                         <br>
-                        <button class="btn bg-danger" data-bs-toggle="modal" data-bs-target="#reject">Reconsider</button>
+                        <button class="btn bg-danger text-light" data-bs-toggle="modal" data-bs-target="#reject">Reconsider</button>
                         <br>
                     </div>
                 </div>

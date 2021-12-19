@@ -140,12 +140,26 @@ passport.use(new GitHubStrategy(passportConfig,
         con.query("SELECT * FROM users WHERE apiUserId = ?",[profile.id], function(err, rows) {
           if (err)
               console.log(err);
+              console.log(rows)
+              if(rows.length) {
                 rows[0].photo = profile.photos[0].value;
                 rows[0].provider = profile.provider;
                 rows[0].username = profile.displayName;
                 rows[0].apiUserId = profile.id;
                 console.log(rows[0])
               return done(null, rows[0]);
+              }else {
+                  const user = {
+                    photo: profile.photos[0].value,
+                    provider: profile.provider,
+                    username: profile.displayName,
+                    apiUserId: profile.id
+                  }
+
+                  rows.push(user);
+
+                  return done(null, rows[0]);
+              }
           
       });
     

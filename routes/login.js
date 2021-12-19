@@ -73,7 +73,7 @@ router.get('/auth',
     const user = req.user;
     console.log(user)
     if(!req.user.id){
-    res.redirect(`/accounts/settings?userId=${user.apiUserId}&username=${user.displayName}&profilePhoto=${user.photo}`);
+    res.redirect(`/accounts/settings`);
     }else {
     res.redirect('/projectOwner?id=${req.user.id}')
     }

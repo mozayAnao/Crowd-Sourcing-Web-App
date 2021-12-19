@@ -64,9 +64,9 @@
                 <%}else if(projectDetails[0].statusId == 6) {%>
                   <button class="btn bg-info">Under Review</button>
                   <%}else if(projectDetails[0].statusId == 2) {%>
-                      <button class="btn bg-primary">Reviewed</button>
+                      <button class="btn bg-primary text-light">Reviewed</button>
                       <%}else {%>
-                          <button class="btn bg-success">Published</button>
+                          <button class="btn bg-success text-light">Published</button>
                           <%}%>
             
             <br>
@@ -74,7 +74,7 @@
             <button class="btn bg-info" data-bs-toggle="modal" data-bs-target="#paymentOption">Payment Info</button>
             <br>
             <br>
-            <button class="btn bg-secondary" onclick="window.location.href='/projectOwner/editProject?id=<%=projectDetails[0].id%>'">Delete Project</button>
+            <button class="btn bg-secondary text-light" onclick="window.location.href='/projectOwner/editProject?id=<%=projectDetails[0].id%>'">Delete Project</button>
             <br>
         </div>
     </div>

@@ -95,7 +95,7 @@
                         <button class="btn bg-info" data-bs-toggle="modal" data-bs-target="#review">Review</button>                  
                         <br>
                         <br>
-                        <button class="btn bg-danger" onclick="window.location.href='/projectOwner/editProject?id=<%=projectDetails[0].id%>'">Delete Project</button>
+                        <button class="btn bg-danger text-light" onclick="window.location.href='/projectOwner/editProject?id=<%=projectDetails[0].id%>'">Delete Project</button>
                         <br>
                     </div>
                 </div>
@@ -298,7 +298,7 @@
             
               <!-- Modal -->
             <div class="modal" id="updateDescription" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
                   <div class="modal-content bg-light border-0">
                         <form class="frm updateForm" action="/admin/editProject?projectId=<%=projectDetails[0].id%>&model=description" method="post">
                             <div class="mb-3">
@@ -321,7 +321,7 @@
             
                <!-- Modal -->
             <div class="modal" id="updateAimedResult" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
                   <div class="modal-content bg-light border-0">
                         <form class="frm updateForm" action="/admin/editProject?projectId=<%=projectDetails[0].id%>&model=aim" method="post">
                             <div class="mb-3">
@@ -344,7 +344,7 @@
             
                <!-- Modal -->
             <div class="modal" id="updateImpact" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
                   <div class="modal-content bg-light border-0">
                         <form class="frm updateForm" action="/admin/editProject?projectId=<%=projectDetails[0].id%>&model=impact" method="post">
                             <div class="mb-3">

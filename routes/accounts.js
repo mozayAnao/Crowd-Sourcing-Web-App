@@ -15,9 +15,7 @@ router.get('/settings', function(req, res, next) {
           if (err) throw err;
           console.log("1 record inserted");
           res.render('accountInfo', { 
-            username: req.user.username,
-            profilePhoto: req.user.photo,
-            apiUserId: req.user.apiUserId 
+            user: req.user
           });
         });   
     
