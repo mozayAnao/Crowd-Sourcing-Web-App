@@ -12,6 +12,7 @@ router.get('/', auth.isLoggedOut, function(req, res, next) {
     console.log(result);
     res.render('index', { 
       message: req.flash('loginMessage'),
+      signupmessage: req.query.msg,
       projects: result 
     });
   });

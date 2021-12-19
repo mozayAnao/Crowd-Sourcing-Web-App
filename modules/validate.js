@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
-// const Joi = require('joi');
+const Joi = require('joi');
 
-module.exports = function validate (req, res, next) {
+module.exports = async function validate (req, res, next) {
 
     const data = req.body;
+    console.log(req.body)
 
     const schema = Joi.object({
         name: Joi.string()
@@ -29,7 +30,13 @@ module.exports = function validate (req, res, next) {
     
     })
 
-    schema.validate(data);
+    // schema.validate(data);
+    try {
+        const value = await schema.validateAsync(data);
+    }
+    catch (err) {
+        res.redirect(`/?msg=${err.details[0].message}`)
+    }
 
     next()
 }

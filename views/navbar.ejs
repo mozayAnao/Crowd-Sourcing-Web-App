@@ -98,6 +98,14 @@
     <div class="app signup-modal">
       <form class="frm signup-form" action="/login/signup" method="post">
         <div><img src="/images/logos/black.png" alt="" width="60%" ></div>
+        <% if (signupmessage) { %>
+          <script type="text/javascript">
+            $(window).load(function(){
+                $('#createAcc-modal').modal('show');
+             });
+          </script>
+          <div class="alert alert-danger"><%= signupmessage %></div>
+      <% } %>
         <div class="form-group my-3">
           <label for="name">Full Name: </label>
           <input type="text" name="name" id="name" placeholder="Enter your name"  required>
