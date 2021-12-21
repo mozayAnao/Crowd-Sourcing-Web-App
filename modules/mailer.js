@@ -5,8 +5,8 @@ module.exports = function mailer(receipient, subject, html) {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: 'mosesanao13@gmail.com',
-          pass: 'debous@13'
+          user: PROCESS.ENV.email,
+          pass: PROCESS.ENV.password
         }
       });
       
