@@ -94,7 +94,7 @@ router.get('/email', function(req, res, next) {
 	});
 
 	// process the signup form
-	router.post('/signup', validate, passport.authenticate('local-signup', {
+	router.post('/signup', validate.signUp, passport.authenticate('local-signup', {
 		// successRedirect : '/projectOwner', // redirect to the secure profile section
 		failureRedirect : '/', // redirect back to the signup page if there is an error
 		failureFlash : true // allow flash messages

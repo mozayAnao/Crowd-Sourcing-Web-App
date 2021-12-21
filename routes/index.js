@@ -46,6 +46,7 @@ router.get('/viewProject', function(req, res, next) {
                 res.render('viewProject', { 
                   message: req.flash('loginMessage'),
                   projectDetails: projectDetails,
+                  signupmessage: req.query.msg,
                   projectFunding: projectFunding,
                   photos: photos,
                   address: address,

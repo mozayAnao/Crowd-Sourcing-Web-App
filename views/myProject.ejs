@@ -7,12 +7,12 @@
             <div id="prj1" type="button" data-bs-toggle="modal" data-bs-target="#updatetitle" title="Click to Edit"><h2><%=projectDetails[0].title%></h2></div>
             <div id="prj1" type="button" data-bs-toggle="modal" data-bs-target="#updatetitle" title="Click to Edit"><p>by <%=projectDetails[0].organizationName%></p></div>
             <br>
-            <div id="prj1" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photos[0].path%>" alt="" width="100%" height="400px"></div>
+            <!-- <div id="prj1" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photos[0].path%>" alt="" width="100%" height="400px"></div> -->
             <div id="prj1"><h4>Description of the project</h4></div>
             <div id="prj1" type="button" data-bs-toggle="modal" data-bs-target="#updateDescription" title="Click to Edit"><p><%=projectDetails[0].description%></p></div>
             <br>
             <br>
-            <div id="prj1" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photos[1].path%>" alt="" width="100%" height="400px"></div>
+            <!-- <div id="prj1" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photos[1].path%>" alt="" width="100%" height="400px"></div> -->
             <br>
             <div id="prj1"><h4>Aimed end result of the project</h4></div>
             <div id="prj1" type="button" data-bs-toggle="modal" data-bs-target="#updateAimedResult" title="Click to Edit"><p><%=projectDetails[0].aimedResult%></p></div>
@@ -21,7 +21,16 @@
             <div id="prj1"><h4>Description of the impact on the digital transformation of Africa </h4></div>
             <div id="prj1" type="button" data-bs-toggle="modal" data-bs-target="#updateImpact" title="Click to Edit"><p><%=projectDetails[0].descriptionOfImpact%></p></div>
             <br>
-            <div id="prj1" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photos[2].path%>" alt="" width="100%" height="400px"></div>
+            <!-- <div id="prj1" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photos[2].path%>" alt="" width="100%" height="400px"></div> -->
+
+            <div>
+              <div><h4>Photos</h4></div>
+              <div id="reviewPhotos">
+              <%photos.forEach((photo) => {%>
+                <div id="reviewPhoto" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photo.path%>" alt="" width="100%" height="100px"></div>
+                <%})%>
+            </div>
+          </div>
         </div>
         <div class="prj2">
             

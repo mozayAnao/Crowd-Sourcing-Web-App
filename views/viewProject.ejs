@@ -21,12 +21,12 @@
                         <div id="prj1"><p><%=projectDetails[0].descriptionOfImpact%></p></div>
                         <br>
                         <!-- <div id="prj1" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photos[2].path%>" alt="" width="100%" height="400px"></div> -->
-                        <div>
+                         <div>
                             <div><h4>Photos</h4></div>
                             <div id="reviewPhotos">
-                                <div id="reviewPhoto"><img src="<%=photos[0].path%>" alt="" width="100%" height="100px"></div>
-                                <div id="reviewPhoto"><img src="<%=photos[1].path%>" alt="" width="100%" height="100px"></div>
-                                <div id="reviewPhoto"><img src="<%=photos[2].path%>" alt="" width="100%" height="100px"></div>
+                            <%photos.forEach((photo) => {%>
+                              <div id="reviewPhoto" data-bs-toggle="tooltip" title="Click to Edit"><img src="<%=photo.path%>" alt="" width="100%" height="100px"></div>
+                              <%})%>
                             </div>
                         </div>
                     </div>
