@@ -9,6 +9,7 @@ const passport = require('passport');
 const flash    = require('connect-flash');
 const GitHubStrategy = require('passport-github').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
+require('dotenv').config();
 
 // const helmet = require('helmet');
 

@@ -6,12 +6,13 @@ const con = require('../modules/dbConnect');
 const mailer = require('../modules/mailer');
 const auth = require('../modules/authenticate');
 const bcrypt = require('bcrypt-nodejs');
+const validate = require('../modules/validate');
 
-router.get('/', auth.isLoggedOut, function(req, res, next) {
+router.get('/', auth.isLoggedOut, function(req, res) {
   res.render('adminLogin', { message: req.flash('loginMessage') });
 });
 
-router.get('/dashboard', auth.isLoggedIn, function(req, res, next) {
+router.get('/dashboard', auth.isLoggedIn, function(req, res) {
   var sql = `SELECT project_details.id AS id, project_details.title AS title, project_details.description AS description, project_details.organizationName AS organization, project_details.fundCampaignstartDate, project_details.fundCampaignEndDate, project_details.statusId AS projectStatusId, project_funding.amountRequired, project_funding.amountRecieved, project_funding.currencyId, addresses.country, users.name, users.email, users.phoneNumber FROM project_details JOIN project_funding ON project_details.id = project_funding.projectId JOIN addresses on project_funding.projectId = addresses.id JOIN users on project_details.projectOwnerId = users.id`;
   var sql2 = "SELECT COUNT(*) FROM users WHERE roleId < 4";
   var sql3 = "SELECT COUNT(*) FROM users WHERE roleId = 4";
@@ -47,7 +48,7 @@ router.get('/dashboard', auth.isLoggedIn, function(req, res, next) {
   }) 
 });
 
-router.get('/addUser', auth.isLoggedIn, function(req, res, next) {
+router.get('/addUser', auth.isLoggedIn, function(req, res) {
   res.render('addUser', {
     user: req.user,
     message: req.query.msg,
@@ -55,10 +56,10 @@ router.get('/addUser', auth.isLoggedIn, function(req, res, next) {
   });
 });
 
-router.post('/saveUser', auth.isLoggedIn, function(req, res, next) {
+router.post('/saveUser', [auth.isLoggedIn, validate.addUser], function(req, res) {
   console.log(req.body)
   userId = "AD"+uuidv4();
-  var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%^&*()ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var chars = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var passwordLength = 6;
   var password = "";
   for (var i = 0; i <= passwordLength; i++) {
@@ -90,7 +91,7 @@ router.post('/saveUser', auth.isLoggedIn, function(req, res, next) {
   })
 });
 
-router.get('/manageUsers', auth.isLoggedIn, function(req, res, next) {
+router.get('/manageUsers', auth.isLoggedIn, function(req, res) {
   const sql = `SELECT users.id, users.name, users.email, users.phoneNumber, users.roleId, roles.role FROM users LEFT JOIN roles on users.roleId = roles.id`;
   con.query(sql, function (err, result) {
     if (err) throw err;
@@ -102,7 +103,7 @@ router.get('/manageUsers', auth.isLoggedIn, function(req, res, next) {
   })
 });
 
-router.get('/editUser', auth.isLoggedIn, function(req, res, next) {
+router.get('/editUser', auth.isLoggedIn, function(req, res) {
   const sql = `SELECT users.id, users.name, users.email, users.phoneNumber, users.roleId, roles.role FROM users LEFT JOIN roles on users.roleId = roles.id WHERE users.id = ${req.query.id}`;
   con.query(sql, function (err, result) {
     if (err) throw err;
@@ -115,7 +116,7 @@ router.get('/editUser', auth.isLoggedIn, function(req, res, next) {
   })
 });
 
-router.post('/updateUser', auth.isLoggedIn, function(req, res, next) {
+router.post('/updateUser', [auth.isLoggedIn, validate.editUser], function(req, res) {
   console.log(req.body)
   const sql = `UPDATE users SET name = "${req.body.name}", email = "${req.body.email}", phoneNumber = "${req.body.phoneCode}", roleId = "${req.body.role}" WHERE id = '${req.query.id}'`;
   con.query(sql, function (err, result) {
@@ -125,7 +126,7 @@ router.post('/updateUser', auth.isLoggedIn, function(req, res, next) {
   })
 });
 
-router.get('/delete', auth.isLoggedIn, function(req, res, next) {
+router.get('/delete', auth.isLoggedIn, function(req, res) {
     res.render('deleteUser', {
       user: req.user,
       userName: req.query.name,
@@ -133,7 +134,7 @@ router.get('/delete', auth.isLoggedIn, function(req, res, next) {
   })
 });
 
-router.post('/deleteUser', auth.isLoggedIn, function(req, res, next) {
+router.post('/deleteUser', auth.isLoggedIn, function(req, res) {
   console.log(req.body)
   const sql = `DELETE FROM users WHERE id = '${req.body.userId}'`;
   const sql2 = `DELETE FROM login_table WHERE userId = '${req.body.userId}'`;
@@ -148,7 +149,7 @@ router.post('/deleteUser', auth.isLoggedIn, function(req, res, next) {
   })
 });
 
-router.get('/newProjects', auth.isLoggedIn, function(req, res, next) {
+router.get('/newProjects', auth.isLoggedIn, function(req, res) {
   var sql = `SELECT project_details.id AS id, project_details.title AS title, project_details.description AS description, project_details.fundCampaignstartDate, project_details.fundCampaignEndDate, project_details.statusId AS projectStatusId, project_funding.amountRequired, project_funding.amountRecieved, project_funding.currencyId, photos.projectId, photos.path FROM project_details JOIN project_funding ON project_details.id = project_funding.projectId JOIN photos on project_funding.projectId = photos.projectId WHERE project_details.statusId = '1' GROUP BY photos.projectId`;
   con.query(sql, function (err, result) {
     if (err) throw err;
@@ -161,7 +162,7 @@ router.get('/newProjects', auth.isLoggedIn, function(req, res, next) {
   
 });
 
-router.get('/newProject', auth.isLoggedIn, function(req, res, next) {
+router.get('/newProject', auth.isLoggedIn, function(req, res) {
   var sql = `SELECT * FROM project_details WHERE id = '${req.query.id}'`;
   var sql2 = `SELECT * FROM project_funding WHERE projectId = '${req.query.id}'`;
   var sql3 = `SELECT * FROM photos WHERE projectId = '${req.query.id}'`;
@@ -209,7 +210,7 @@ router.get('/newProject', auth.isLoggedIn, function(req, res, next) {
   }); 
 });
 
-router.post('/editProject', auth.isLoggedIn, function(req, res, next) {
+router.post('/editProject', auth.isLoggedIn, function(req, res) {
   if(req.query.model == 'description') {
     var sql = `UPDATE project_details SET description = "${req.body.description}" WHERE id = '${req.query.projectId}'`
     con.query(sql, function(err, rows) {
@@ -285,7 +286,7 @@ router.post('/editProject', auth.isLoggedIn, function(req, res, next) {
   }
 });
 
-router.post('/assignReviewer', auth.isLoggedIn, function(req, res, next) {
+router.post('/assignReviewer', auth.isLoggedIn, function(req, res) {
   console.log(req.body)
   const sql = `INSERT INTO project_review (projectId, reviewerId) VALUES (?,?)`;
   const sql2 = `UPDATE project_details SET statusId = '6' WHERE id = '${req.body.projectId}'`;
@@ -309,7 +310,7 @@ router.post('/assignReviewer', auth.isLoggedIn, function(req, res, next) {
   })
 });
 
-router.post('/reviewProject', auth.isLoggedIn, function(req, res, next) {
+router.post('/reviewProject', auth.isLoggedIn, function(req, res) {
   var sql = `UPDATE project_details SET statusId = '2' WHERE id = '${req.body.projectId}'`;
   var sql2 = `INSERT INTO project_review (projectId, reviewerId, remark, decision) VALUES (?,?,?,?)`
   // var sql2 = `UPDATE project_review SET remark = "${req.body.remarks}", decision = '${req.body.decision}' WHERE projectId = '${req.body.projectId}'`;
@@ -328,7 +329,7 @@ router.post('/reviewProject', auth.isLoggedIn, function(req, res, next) {
   });
 });
 
-router.get('/reviewedProjects', auth.isLoggedIn, function(req, res, next) {
+router.get('/reviewedProjects', auth.isLoggedIn, function(req, res) {
   var sql = `SELECT project_details.id AS id, project_details.title AS title, project_details.description AS description, project_details.fundCampaignstartDate, project_details.fundCampaignEndDate, project_details.statusId AS projectStatusId, project_funding.amountRequired, project_funding.amountRecieved, project_funding.currencyId, photos.projectId, photos.path FROM project_details JOIN project_funding ON project_details.id = project_funding.projectId JOIN photos on project_funding.projectId = photos.projectId WHERE project_details.statusId = '2' GROUP BY photos.projectId`;
   con.query(sql, function (err, result) {
     if (err) throw err;
@@ -341,7 +342,7 @@ router.get('/reviewedProjects', auth.isLoggedIn, function(req, res, next) {
   
 });
 
-router.get('/publishProject', auth.isLoggedIn, function(req, res, next) {
+router.get('/publishProject', auth.isLoggedIn, function(req, res) {
   var sql = `SELECT * FROM project_details WHERE id = '${req.query.id}'`;
   var sql2 = `SELECT * FROM project_funding WHERE projectId = '${req.query.id}'`;
   var sql3 = `SELECT * FROM photos WHERE projectId = '${req.query.id}'`;
@@ -406,7 +407,7 @@ router.get('/publishProject', auth.isLoggedIn, function(req, res, next) {
   }); 
 });
 
-router.get('/requestPayInfo', auth.isLoggedIn, function(req, res, next) {
+router.get('/requestPayInfo', auth.isLoggedIn, function(req, res) {
   console.log(req.query)
   const receipient = req.query.email;
   const subject =  `Payment Information`;
@@ -415,7 +416,7 @@ router.get('/requestPayInfo', auth.isLoggedIn, function(req, res, next) {
     res.redirect(`/admin/publishProject?id=${req.query.id}`)  
 });
 
-router.get('/publish', auth.isLoggedIn, function(req, res, next) {
+router.put('/publish', auth.isLoggedIn, function(req, res, next) {
   var sql = `UPDATE project_details SET statusId = '3' WHERE id = '${req.query.projectId}'`;
   con.query(sql, function (err, result) {
     if (err) throw err;
@@ -426,7 +427,38 @@ router.get('/publish', auth.isLoggedIn, function(req, res, next) {
     mailer(receipient, subject, html);
     res.redirect(`/admin/reviewedProjects`)
   });
+});
+
+router.get('/deleteProject/:projectId', auth.isLoggedIn, function(req, res) {
+  res.render('deleteProject', {
+    user: req.user,
+    projectId: req.params.projectId,
+})
+});
   
+  router.post('/deleteProject', auth.isLoggedIn, function(req, res) {
+    var sql1 = `DELETE FROM project_details WHERE id = '${req.body.projectId}'`;
+    var sql2 = `DELETE FROM project_funding WHERE id = '${req.body.projectId}'`;
+    var sql3 = `DELETE FROM photos WHERE id = '${req.body.projectId}'`;
+    var sql4 = `DELETE FROM addresses WHERE id = '${req.body.projectId}'`;
+    con.query(sql1, function (err, result) {
+      if (err) throw err;
+      con.query(sql2, function (err, result) {
+        if (err) throw err;
+        con.query(sql3, function (err, result) {
+          if (err) throw err;
+          con.query(sql4, function (err, result) {
+            if (err) throw err;
+            console.log(result);
+            // const receipient = req.query.email;
+            // const subject =  `Project Pulished`;
+            // const html = `<div><p>Hi! ${req.query.po}, your project title: <b>${req.query.title}</b> has been published. Please make sure payment information has been provided</p></div> <div><p>Thank you</p></div>`
+            // mailer(receipient, subject, html);
+            res.redirect(`/admin/newProjects`)
+          });
+        });
+      });
+    }); 
 });
 
 module.exports = router;

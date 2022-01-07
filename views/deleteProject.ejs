@@ -6,20 +6,20 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12 text-green">
-              <h4><ion-icon name="people"></ion-icon> Users</h4>
+                <h4><ion-icon name="documents"></ion-icon> New Project</h4>
             </div>
           </div>
                   
           <div class="row">
             <div class="col-md-12 mb-3">
               <div class="bg-body shadow p-3 mb-5 bg-body rounded" id="deleteUser-form">
-                  <h4><a href="/admin/manageUsers"><ion-icon name="arrow-back-circle-sharp"></ion-icon></a> Delete user</h4>
-                <form action="/admin/deleteUser" method="post">
+                  <h4><a href="/admin/newProject"><ion-icon name="arrow-back-circle-sharp"></ion-icon></a> Delete Project</h4>
+                <form action="/admin/deleteProject" method="post">
                     
                     <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Confirm Removal of <%=userName%>. This action can not be reversed!</label>
+                        <label for="exampleInputEmail1" class="form-label">Are you sure you want to delete this Project. This is not reversible!!</label>
                         
-                        <input type="hidden" id="userId" name="userId" value="<%=userId%>">
+                        <input type="hidden" id="projectId" name="projectId" value="<%=projectId%>">
                     </div>
                     
                     <button type="submit" class="btn btn-primary">Confirm</button>

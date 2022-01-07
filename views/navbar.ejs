@@ -58,7 +58,7 @@
 
     
             <div>
-                <button type="button" class="d-grid gap-3 col-12 mx-auto btn bg-green text-light strong p-2" id="createAccBtn" data-bs-toggle="modal" data-bs-target="#createAcc-modal" > Create an account</button>
+                <button type="button" class="d-grid gap-3 col-12 mx-auto btn bg-green text-light strong p-2" id="createAccBtn" data-bs-toggle="modal" data-bs-target="#createAcc-modal" data-bs-dismiss="modal"> Create an account</button>
             </div>
            <div class="text-center"><hr>or login via <hr></div>
 
@@ -71,12 +71,12 @@
 
                   <button class="btn btn-secondary p-2" type="button" onclick="window.location.href='/login/github'"><ion-icon name="logo-github"></ion-icon>Sign up with GitHub</button>
 
-                  <button class="btn btn-light p-2" type="button" onclick="window.location.href='/login/email'"><ion-icon name="mail-outline"></ion-icon>Sign up with Email</button>
+                  <button class="btn btn-light p-2" ><ion-icon name="mail-outline"></ion-icon>Sign up with Email</button>
               </div>
 
               <hr>
             <div>
-              <p class="pt-3 text-center">Already have an account? <a class="text-green text-decoration-none" href="#login" >Sign in</a> </p>
+              <p class="pt-3 text-center">Already have an account? <a class="text-green text-decoration-none" href="" type="button" data-bs-toggle="modal" data-bs-target="#login-modal" data-bs-dismiss="modal">Sign in</a> </p>
             <p id="termsPolicies">By registering, the user agrees to comply with MNFundAfric's <a class="text-green text-decoration-none" href="#"> Terms of Use </a>  and  <a class="text-green text-decoration-none" href="#"> Privacy Policy.</a> </p>
           </div>
 
@@ -186,7 +186,7 @@
               <div>
                   <input type="submit" value="Login ">
               </div>
-              <p class="h6 my-4 text-center">Don't have an account? <a class="text-green text-decoration-none" href="#signup"> Sign up </a> </p>
+              <p class="h6 my-4 text-center">Don't have an account? <a class="text-green text-decoration-none" href="" type="button" data-bs-toggle="modal" data-bs-target="#signup-modal" data-bs-dismiss="modal"> Sign up </a> </p>
 
           </form>
       </div>

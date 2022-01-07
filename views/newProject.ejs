@@ -1,6 +1,7 @@
 <%include header%> 
 <body>
     <%include adminNav%>
+    <%include adminOffcanvas%>
       <main class="mt-5 pt-12">
         <div class="container-fluid">
           <div class="row">
@@ -96,7 +97,7 @@
                         <button class="btn bg-info" data-bs-toggle="modal" data-bs-target="#review">Review</button>                  
                         <br>
                         <br>
-                        <button class="btn bg-danger text-light" onclick="window.location.href='/projectOwner/editProject?id=<%=projectDetails[0].id%>'">Delete Project</button>
+                        <button class="btn bg-danger text-light" onclick="window.location.href='/admin/deleteProject/<%=projectDetails[0].id%>'">Delete Project</button>
                         <br>
                     </div>
                 </div>
