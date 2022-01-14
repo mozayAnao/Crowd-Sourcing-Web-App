@@ -65,7 +65,7 @@ module.exports = function(passport) {
                 if (rows.length) {
                     return done(null, false, req.flash('signupMessage', 'This email is already taken.'));
                 } else {
-                    // if there is no user with that username
+                    // if there is no user with that email
                     // create the user
                     var newUserMysql = {
                         userId: "PO"+uuidv4(),
@@ -108,9 +108,9 @@ module.exports = function(passport) {
 
     // =======================Passport-Twitter=======================
     passport.use(new TwitterStrategy({
-        consumerKey: 'bzOBlFL8gKuWk7a8xDr2Ja9KV',
-        consumerSecret: 'JaYuZPDD2tjX7tXGr1gYmAZxhwMELBO1Bx3NxdtQiMZ9drO1Wn',
-        callbackURL: "http://127.0.0.1:5000/auth/twitter/callback"
+        consumerKey: process.env.CONSUMER_KEY,
+        consumerSecret: process.env.CONSUMER_SECRET,
+        callbackURL: process.env.TWITTER_CALLBACK_URL
       },
       function(token, tokenSecret, profile, cb) {
         // User.findOrCreate({ twitterId: profile.id }, function (err, user) {
